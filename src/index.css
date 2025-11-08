@@ -1,0 +1,16 @@
+html {
+  scroll-behavior: smooth;
+}
+@import "tailwindcss";
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px); /* how high it floats */
+  }
+}
+
+.float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
