@@ -1,13 +1,48 @@
 import Leaf from "../assets/Leaf.png";
+import L2 from "../assets/L2.png";
+
+import { useEffect, useRef } from "react";
 
 export default function About() {
+   const aboutRef = useRef(null);
+
+  useEffect(() => {
+    const element = aboutRef.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("fade-in");
+            // optional: stop observing once it's visible
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, []);
   return (
     <section
+     ref={aboutRef}
   id="about"
   className="relative min-h-screen flex flex-col items-center justify-center px-6 py-20"
 >
+  {/* Decorative art image on top left */}
+<div className="hidden md:block absolute left-0 top-10">
+  <img
+    src={L2}
+    alt="Decorative top art"
+    className="w-36 float-slow"
+  />
+</div>
   {/* Decorative art image on bottom right */}
-  <div className="hidden md:block absolute right-10 bottom-10">
+  <div className="hidden md:block absolute right-0 bottom-10">
     <img
       src={Leaf}
       alt="Decorative art"
@@ -16,7 +51,7 @@ export default function About() {
   </div>
 
   <div className="max-w-4xl text-center text-slate-900">
-    <h2 className="text-3xl md:text-4xl font-bold mb-6">About Me 👋🧡</h2>
+    <h2 className="text-3xl md:text-4xl font-bold mb-6">About Me 👋🏾🧡</h2>
     <p className="text-slate-800 leading-relaxed">
       I’m Gladwel — a web developer, UI/UX designer, and artist who finds beauty
       in structure, simplicity, and creativity. I love blending clean code with

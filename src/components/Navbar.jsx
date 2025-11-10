@@ -1,3 +1,4 @@
+import Logo from "../assets/logo.png";
 import { useState, useEffect } from "react";
 
 const links = [
@@ -6,6 +7,7 @@ const links = [
   { id: "uiux", label: "UI/UX" },
   { id: "art", label: "Art" },
   { id: "about", label: "About" },
+  { id: "extras", label: "Extras" },
   { id: "contact", label: "Contact" },
 ];
 
@@ -89,10 +91,14 @@ export default function Navbar() {
       }`}
     >
       <nav className="max-w-6xl mx-auto flex items-center justify-between px-6 py-3">
-        {/* Logo / Name */}
-        <div className={`text-lg font-bold tracking-tight ${navText}`}>
-          GT<span className="opacity-70">.</span>
-        </div>
+        {/* Logo / Image */}
+        <div className="flex items-center">
+  <img
+    src={Logo}
+    alt="Logo"
+    className="w-10 h-10 object-contain mr-2"
+  />
+</div>
 
         {/* Desktop links */}
         <ul className="hidden md:flex gap-6">

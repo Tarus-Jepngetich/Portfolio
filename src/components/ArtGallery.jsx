@@ -1,13 +1,22 @@
-{/*import Main_Pages from "../assets/Main_Pages.png";*/}
+import L5 from "../assets/L5.png";
+
 
 export default function ArtGallery() {
   return (
            
         <section
           id="art"
-          className="min-h-screen flex items-center justify-center px-6 py-20"
+          className="relative min-h-screen flex items-center justify-center px-6 py-20"
           
         >
+          
+<div className=" hidden md:block absolute right-0 bottom-10">
+  <img
+    src={L5}
+    alt="Decorative art"
+    className="w-50 float-slow "
+  />
+</div> 
           <div className="max-w-6xl mx-auto text-center text-slate-900">
             <h2 className="text-3xl md:text-4xl font-bold mb-10">
               Art & Illustration 🎨

@@ -7,10 +7,40 @@ html {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-12px); /* how high it floats */
+    transform: translateY(-12px);
   }
 }
 
 .float-slow {
   animation: float-slow 6s ease-in-out infinite;
+}
+
+/* Optional alt float if you want a slightly different rhythm */
+@keyframes float-slow-alt {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+.float-slow-alt {
+  animation: float-slow-alt 7s ease-in-out infinite;
+}
+
+/* Fade-in animation */
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fade-in 1.2s ease-out forwards;
 }

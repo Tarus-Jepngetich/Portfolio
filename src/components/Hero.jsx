@@ -15,7 +15,7 @@ export default function Hero() {
               Web Developer • UI/UX • Artist
             </p>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-              Hi, I’m Tarus 👏— I design & build digital experiences.
+              Hi, I’m Tarus 👏🏾— I design & build digital experiences.
             </h1>
             <p className="text-slate-100/90 text-base md:text-lg mb-8">
               I blend clean code, thoughtful interfaces, and visual storytelling

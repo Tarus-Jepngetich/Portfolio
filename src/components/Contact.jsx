@@ -14,6 +14,13 @@ export default function Contact() {
     className="w-40 float-slow"
   />
 </div>
+<div className="hidden md:block absolute right-10 top-1/2 -translate-y-1/2">
+  <img
+    src={Flower}
+    alt="Decorative art"
+    className="w-40 float-slow scale-x-[-1]"
+  />
+</div>
 
   <div className="max-w-3xl text-center text-slate-900">
     <h2 className="text-3xl md:text-4xl font-bold mb-6">Get in Touch 💌</h2>

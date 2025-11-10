@@ -1,14 +1,29 @@
 
-{/*import Main_Pages from "../assets/Main_Pages.png";*/}
+import L1 from "../assets/L1.png";
 
 export default function WebProjects() {
   return (
           
         <section
           id="projects"
-  className="min-h-screen flex items-center justify-center"
+  className="relative min-h-screen flex items-center justify-center"
   
 >
+  <div className="hidden md:block absolute right-0 top-0">
+  <img
+    src={L1}
+    alt="Decorative art"
+    className="w-55 float-slow"
+  />
+</div> 
+ <div className="hidden md:block absolute left-0 top-0">
+  <img
+    src={L1}
+    alt="Decorative art"
+    className="w-55 float-slow scale-x-[-1]"
+  />
+</div> 
+
   <div className="max-w-5xl mx-auto px-6 text-center text-slate-900">
     <h2 className="text-3xl md:text-4xl font-bold mb-8">
       Web Development Projects
