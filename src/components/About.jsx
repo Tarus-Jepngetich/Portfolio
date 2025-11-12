@@ -1,68 +1,54 @@
-import Leaf from "../assets/Leaf.png";
 import L2 from "../assets/L2.png";
-
-import { useEffect, useRef } from "react";
+import Leaf from "../assets/Leaf.png";
 
 export default function About() {
-   const aboutRef = useRef(null);
-
-  useEffect(() => {
-    const element = aboutRef.current;
-    if (!element) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("fade-in");
-            // optional: stop observing once it's visible
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
-
-    observer.observe(element);
-
-    return () => observer.disconnect();
-  }, []);
   return (
     <section
-     ref={aboutRef}
-  id="about"
-  className="relative min-h-screen flex flex-col items-center justify-center px-6 py-20"
->
-  {/* Decorative art image on top left */}
-<div className="hidden md:block absolute left-0 top-10">
-  <img
-    src={L2}
-    alt="Decorative top art"
-    className="w-36 float-slow"
-  />
-</div>
-  {/* Decorative art image on bottom right */}
-  <div className="hidden md:block absolute right-0 bottom-10">
-    <img
-      src={Leaf}
-      alt="Decorative art"
-      className="w-36 float-slow"
-    />
-  </div>
+      id="about"
+      className="relative min-h-screen flex flex-col items-center justify-center px-6 py-20"
+    >
+      {/* Decorative PNGs */}
+      {/* Top Left */}
+      <div className="hidden md:block absolute top-0 left-0">
+        <img
+          src={L2}
+          alt="Decorative corner"
+          className="w-40 md:w-52 float-slow"
+        />
+      </div>
 
-  <div className="max-w-4xl text-center text-slate-900">
-    <h2 className="text-3xl md:text-4xl font-bold mb-6">About Me 👋🏾🧡</h2>
-    <p className="text-slate-800 leading-relaxed">
-      I’m Gladwel — a web developer, UI/UX designer, and artist who finds beauty
-      in structure, simplicity, and creativity. I love blending clean code with
-      expressive visuals to craft experiences that feel warm and human.
-    </p>
-    <p className="text-slate-800 mt-4">
-      When I’m not designing or coding, you’ll find me sketching, painting, or
-      exploring small, peaceful corners of life that inspire my art and design
-      process.
-    </p>
-  </div>
-</section>
+      {/* Top Right (mirrored) */}
+      <div className="hidden md:block absolute top-0 right-0">
+        <img
+          src={L2}
+          alt="Decorative corner mirrored"
+          className="w-40 md:w-52 float-slow scale-x-[-1]"
+        />
+      </div>
+
+      {/* Bottom Right Leaf */}
+      <div className="hidden md:block absolute bottom-10 right-0">
+        <img
+          src={Leaf}
+          alt="Leaf decorative"
+          className="w-48 md:w-56 float-slow-alt"
+        />
+      </div>
+
+      {/* Main content */}
+      <div className="max-w-3xl text-center text-slate-900">
+        <h2 className="text-3xl md:text-4xl font-bold mb-6">About Me 🌿</h2>
+        <p className="text-slate-800 leading-relaxed">
+          I’m <span className="font-semibold">Tarus Mercy Jepngetich</span>, a designer, developer,
+          and artist passionate about crafting experiences that blend technology
+          with emotion. My work spans from digital storytelling to functional
+          design systems that bring ideas to life beautifully.
+        </p>
+        <p className="mt-4 text-slate-800 leading-relaxed">
+          Whether sketching concepts, designing intuitive UIs, or coding smooth
+          web experiences, I love connecting art, empathy, and innovation.
+        </p>
+      </div>
+    </section>
   );
 }

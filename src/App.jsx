@@ -1,43 +1,20 @@
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import WebProjects from "./components/WebProjects";
-import UIDesigns from "./components/UIDesigns";
-import ArtGallery from "./components/ArtGallery";
-import About from "./components/About";
-import Extras from "./components/Extras";
-import Contact from "./components/Contact";
-import Cloud from "./assets/Cloud.png";
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
 
+// Journal routes
+import JournalLayout from "./Journal/JournalLayout";
+import GalleryHome from "./Journal/components/GalleryHome";
+import CategoryPage from "./Journal/components/CategoryPage";
 
 export default function App() {
   return (
-    <div className="relative text-slate-100 font-sans scroll-smooth">
-      {/* Background tint layer */}
-      <div className="absolute top-0 left-0 w-full h-full bg-[#FFE3C7]/70 z-0"></div>
+    <Routes>
+      <Route path="/" element={<Home />} />
 
-      {/* Cloud image ABOVE the tint but BELOW content */}
-      <img
-        src={Cloud}
-        alt="Cloud background"
-        className="absolute top-0 left-0 w-full h-full object-cover z-10 opacity-95"
-      />
-
-      {/* Foreground content */}
-      <div className="relative z-20">
-        <Navbar />
-        <Hero />
-        <WebProjects />
-        <UIDesigns />
-        <ArtGallery />
-        <About />
-        <Extras />
-        <Contact />
-
-        <footer className="text-center py-6 text-sm text-slate-300 bg-[#5A3B1E]/80">
-          © {new Date().getFullYear()} TARUS MERCY JEPNG'ETICH. Built with 💙 & Passion using React JS & TailwindCSS.
-        </footer>
-      </div>
-    </div>
+      <Route path="/journal" element={<JournalLayout />}>
+        <Route index element={<GalleryHome />} />
+        <Route path="category/:categoryId" element={<CategoryPage />} />
+      </Route>
+    </Routes>
   );
 }
-
