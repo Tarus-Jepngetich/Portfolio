@@ -2,45 +2,175 @@ html {
   scroll-behavior: smooth;
 }
 @import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* --- Tarus Gazette theme tokens --- */
+:root {
+  --paper: #faf7f0;
+  --ink: #111111;
+  --ink-soft: #333333;
+  --rule: #d7d2c7;
+
+  /* Pastel accents (B) */
+  --mint: #bfe6d5;
+  --peach: #f7c6b8;
+}
+
+/* Make the whole site feel like paper + ink */
+body {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+/* A classic newspaper “rule line” utility */
+.rule {
+  border-top: 1px solid var(--rule);
+}
+
+/* Optional: slight printed feel */
+.print-soft {
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Your existing animations --- */
 @keyframes float-slow {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-12px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
 }
+.float-slow { animation: float-slow 6s ease-in-out infinite; }
 
-.float-slow {
-  animation: float-slow 6s ease-in-out infinite;
-}
-
-/* Optional alt float if you want a slightly different rhythm */
 @keyframes float-slow-alt {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(10px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
 }
+.float-slow-alt { animation: float-slow-alt 7s ease-in-out infinite; }
 
-.float-slow-alt {
-  animation: float-slow-alt 7s ease-in-out infinite;
-}
-
-/* Fade-in animation */
 @keyframes fade-in {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fade-in 1.2s ease-out forwards; }
+
+/* --- A simple “page corner” button look --- */
+.page-corner {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  width: 64px;
+  height: 64px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(0,0,0,0) 50%, var(--peach) 50%);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+  border: 1px solid rgba(0,0,0,0.08);
+}
+.page-corner:hover {
+  transform: translateY(-2px);
+  transition: transform 200ms ease;
+}
+/* --- Page flip mechanics --- */
+.page-stage {
+  perspective: 1400px;
+}
+
+
+/* The corner “fold” button */
+.page-corner-btn {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  width: 64px;
+  height: 64px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(0,0,0,0) 50%, var(--peach) 50%);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+  border: 1px solid rgba(0,0,0,0.08);
+  cursor: pointer;
+}
+
+.page-corner-btn:hover {
+  transform: translateY(-2px);
+  transition: transform 200ms ease;
+}
+/* ---------- Seamless page flip using View Transitions ---------- */
+/* This replaces the rotateY card flip with a “paper peel + blur” */
+
+::view-transition-group(gazette-page) {
+  animation-duration: 1400ms;
+  animation-timing-function: cubic-bezier(.2,.85,.2,1);
+}
+
+::view-transition-old(gazette-page),
+::view-transition-new(gazette-page) {
+  border-radius: 0;
+  box-shadow: 0 18px 50px rgba(0,0,0,0.10);
+}
+
+/* OLD page: peel upward/backward from bottom-right + blur */
+::view-transition-old(gazette-page) {
+  transform-origin: 100% 100%;
+  animation: gazette-peel-out 1400ms cubic-bezier(.2,.85,.2,1) both;
+}
+
+/* NEW page: slides in underneath and sharpens */
+::view-transition-new(gazette-page) {
+  transform-origin: 100% 100%;
+  animation: gazette-peel-in 1400ms cubic-bezier(.2,.85,.2,1) both;
+}
+
+@keyframes gazette-peel-out {
   0% {
-    opacity: 0;
-    transform: translateY(10px);
+    transform: perspective(1400px) rotateZ(0deg) translate(0,0);
+    filter: blur(0px) brightness(1);
+    opacity: 1;
+  }
+  45% {
+    transform: perspective(1400px) rotateZ(-1deg) translate(-10px,-18px);
+    filter: blur(1px) brightness(0.99);
   }
   100% {
-    opacity: 1;
-    transform: translateY(0);
+    transform: perspective(1400px) rotateZ(-4deg) translate(-120px,-260px);
+    filter: blur(3.2px) brightness(0.97);
+    opacity: 0;
   }
 }
 
-.fade-in {
-  animation: fade-in 1.2s ease-out forwards;
+@keyframes gazette-peel-in {
+  0% {
+    transform: perspective(1400px) rotateZ(5deg) translate(70px,120px);
+    filter: blur(3px) brightness(0.99);
+    opacity: 0.2;
+  }
+  60% {
+    transform: perspective(1400px) rotateZ(1deg) translate(14px,22px);
+    filter: blur(1px) brightness(1);
+    opacity: 1;
+  }
+  100% {
+    transform: perspective(1400px) rotateZ(0deg) translate(0,0);
+    filter: blur(0px) brightness(1);
+    opacity: 1;
+  }
 }
+
+
+/* Keep page-sheet styles simple (no rotate flip here) */
+.page-sheet {
+  position: relative;
+  background: white;
+  border: 1px solid var(--rule);
+  box-shadow: 0 18px 50px rgba(0,0,0,0.10);
+  overflow: hidden;
+}
+
+/* Reduce motion support */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(gazette-page),
+  ::view-transition-new(gazette-page) {
+    animation: none !important;
+  }
+}
+

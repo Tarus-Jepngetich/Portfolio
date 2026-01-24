@@ -2,21 +2,21 @@ import Logo from "../assets/logo.png";
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
-const sectionLinks = [
-  { id: "hero", label: "Home" },
-  { id: "about", label: "About" },
-  { id: "extras", label: "Extras" },
-  { id: "contact", label: "Contact" },
+const pageLinks = [
+  { to: "/gazette", label: "Front Page" },
+  { to: "/gazette/about", label: "About" },
+  { to: "/gazette/extras", label: "Extras" },
+  { to: "/gazette/contact", label: "Contact" },
 ];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
-  const [activeSection, setActiveSection] = useState("hero");
 
   // Hide on scroll down, show on scroll up
   useEffect(() => {
     let lastY = window.scrollY;
+
     const handleScroll = () => {
       const y = window.scrollY;
       const delta = y - lastY;
@@ -26,120 +26,140 @@ export default function Navbar() {
         lastY = y;
         return;
       }
+
       if (Math.abs(delta) > 25) {
         if (delta > 0 && !isOpen) setIsVisible(false);
         else if (delta < 0) setIsVisible(true);
         lastY = y;
       }
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isOpen]);
 
-  // Track active section on Home page
-  useEffect(() => {
-    const sections = sectionLinks
-      .map((l) => document.getElementById(l.id))
-      .filter(Boolean);
-    if (sections.length === 0) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setActiveSection(entry.target.id);
-        });
-      },
-      { threshold: 0.5 }
-    );
-    sections.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-
-  const navBg = "bg-[#FFE3C7]/80";
-  const navBorder = "border-b border-[#E6BFA0]";
-  const navText = "text-[#5A3B1E]";
-  const linkBase = "relative text-sm font-medium transition-colors duration-200";
+  const closeMenu = () => setIsOpen(false);
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 backdrop-blur-md transition-transform duration-300 ${navBg} ${navBorder} ${
+      className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ${
         isVisible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <nav className="max-w-6xl mx-auto flex items-center justify-between px-6 py-3">
-        {/* Logo */}
-        <div className="flex items-center">
-          <img src={Logo} alt="Logo" className="w-10 h-10 object-contain mr-2" />
-        </div>
-
-        {/* Desktop links: Home section anchors + Journal route */}
-        <ul className="hidden md:flex gap-6 items-center">
-          {sectionLinks.map((link) => {
-            const isActive = activeSection === link.id;
-            return (
-              <li key={link.id}>
-                <a
-                  href={`#${link.id}`}
-                  className={`${linkBase} ${navText} ${isActive ? "opacity-100" : "opacity-80 hover:opacity-100"}`}
-                >
-                  <span className={`${isActive ? "font-semibold" : "font-medium"}`}>{link.label}</span>
-                  <span
-                    className={`absolute left-0 -bottom-0.5 h-[2px] rounded-full bg-[#5A3B1E] transition-all duration-200 ${
-                      isActive ? "w-full opacity-100" : "w-0 opacity-0 group-hover:w-full"
-                    }`}
-                  />
-                </a>
-              </li>
-            );
-          })}
-          <li>
-            <NavLink
-              to="/journal"
-              className={({ isActive }) =>
-                `${linkBase} ${navText} ${isActive ? "opacity-100 font-semibold" : "opacity-80 hover:opacity-100"}`
-              }
-            >
-              Journal
+      <div className="bg-[var(--paper)]/95 backdrop-blur-md border-b border-[var(--rule)] print-soft">
+        <nav className="max-w-6xl mx-auto px-6 py-3">
+          {/* Top masthead row */}
+          <div className="flex items-center justify-between gap-4">
+            <NavLink to="/gazette" className="flex items-center gap-3" onClick={closeMenu}>
+              <img
+                src={Logo}
+                alt="Tarus logo"
+                className="w-10 h-10 object-contain"
+              />
+              <div className="leading-tight">
+                <div className="text-[11px] tracking-[0.3em] uppercase text-[var(--ink-soft)]">
+                  The
+                </div>
+                <div className="text-xl md:text-2xl font-semibold text-[var(--ink)]">
+                  Tarus Gazette
+                </div>
+              </div>
             </NavLink>
-          </li>
-        </ul>
 
-        {/* Mobile hamburger */}
-        <button
-          onClick={() => setIsOpen((p) => !p)}
-          className={`md:hidden rounded-full px-3 py-2 border border-[#E6BFA0] bg-[#FFE3C7] ${navText} text-lg shadow-sm active:scale-95 transition`}
-          aria-label="Toggle navigation menu"
-        >
-          {isOpen ? "✕" : "☰"}
-        </button>
-      </nav>
+            <div className="hidden md:flex items-center gap-3 text-xs text-[var(--ink-soft)]">
+              <span className="px-2 py-1 rounded-full bg-[var(--mint)]/60 border border-[var(--rule)]">
+                Edition: Portfolio
+              </span>
+              <span className="px-2 py-1 rounded-full bg-[var(--peach)]/60 border border-[var(--rule)]">
+                Web • UI/UX • Art
+              </span>
+            </div>
 
-      {/* Mobile dropdown */}
-      {isOpen && (
-        <div className={`${navBg} ${navBorder} md:hidden`}>
-          <ul className="flex flex-col items-center py-3 space-y-2">
-            {sectionLinks.map((link) => (
-              <li key={link.id}>
-                <a
-                  href={`#${link.id}`}
-                  className={`${navText} text-sm font-medium px-4 py-1 rounded-full transition-colors hover:bg-[#FFE3C7]`}
-                  onClick={() => setIsOpen(false)}
+            {/* Mobile hamburger */}
+            <button
+              onClick={() => setIsOpen((p) => !p)}
+              className="md:hidden rounded-full px-3 py-2 border border-[var(--rule)] bg-white text-[var(--ink)] text-lg shadow-sm active:scale-95 transition"
+              aria-label="Toggle navigation menu"
+            >
+              {isOpen ? "✕" : "☰"}
+            </button>
+          </div>
+
+          {/* Edition strip / nav links */}
+          <div className="mt-3 border-t border-[var(--rule)] pt-2">
+            <ul className="hidden md:flex flex-wrap gap-x-6 gap-y-2 items-center text-[13px]">
+              {pageLinks.map((link) => (
+                <li key={link.to}>
+                  <NavLink
+                    to={link.to}
+                    className={({ isActive }) =>
+                      `uppercase tracking-[0.18em] ${
+                        isActive ? "font-semibold underline" : "font-medium"
+                      } text-[var(--ink)] hover:opacity-80`
+                    }
+                    style={{
+                      textDecorationColor: "var(--peach)",
+                      textUnderlineOffset: "4px",
+                    }}
+                  >
+                    {link.label}
+                  </NavLink>
+                </li>
+              ))}
+
+              <li className="ml-auto">
+                <NavLink
+                  to="/journal"
+                  className={({ isActive }) =>
+                    `uppercase tracking-[0.18em] ${
+                      isActive ? "font-semibold underline" : "font-medium"
+                    } text-[var(--ink)] hover:opacity-80`
+                  }
+                  style={{
+                    textDecorationColor: "var(--mint)",
+                    textUnderlineOffset: "4px",
+                  }}
                 >
-                  {link.label}
-                </a>
+                  Journal
+                </NavLink>
               </li>
-            ))}
-            <li>
-              <NavLink
-                to="/journal"
-                className={`${navText} text-sm font-medium px-4 py-1 rounded-full transition-colors hover:bg-[#FFE3C7]`}
-                onClick={() => setIsOpen(false)}
-              >
-                Journal
-              </NavLink>
-            </li>
-          </ul>
-        </div>
-      )}
+            </ul>
+
+            {/* Mobile dropdown */}
+            {isOpen && (
+              <div className="md:hidden pt-3">
+                <ul className="flex flex-col items-center space-y-2 pb-3">
+                  {pageLinks.map((link) => (
+                    <li key={link.to}>
+                      <NavLink
+                        to={link.to}
+                        className={({ isActive }) =>
+                          `uppercase tracking-[0.18em] text-[13px] ${
+                            isActive ? "font-semibold" : "font-medium"
+                          } text-[var(--ink)] px-4 py-1 rounded-full hover:bg-[var(--mint)]/40`
+                        }
+                        onClick={closeMenu}
+                      >
+                        {link.label}
+                      </NavLink>
+                    </li>
+                  ))}
+
+                  <li>
+                    <NavLink
+                      to="/journal"
+                      className="uppercase tracking-[0.18em] text-[13px] font-medium text-[var(--ink)] px-4 py-1 rounded-full hover:bg-[var(--peach)]/40"
+                      onClick={closeMenu}
+                    >
+                      Journal
+                    </NavLink>
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
+        </nav>
+      </div>
     </header>
   );
 }
