@@ -124,8 +124,7 @@ export default function About() {
           </div>
         </div>
 
-        {/* Page flip corner: jumps to Extras */}
-        <a href="#extras" className="page-corner" aria-label="Flip to next page (Extras)" />
+        
       </div>
     </section>
   );

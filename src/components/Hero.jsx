@@ -23,7 +23,7 @@ export default function Hero() {
           {/* Left: lead story */}
           <div className="md:col-span-7">
             <p className="text-[11px] uppercase tracking-[0.3em] text-[var(--ink-soft)] mb-3">
-              Web Developer • UI/UX • Artist
+              MERN Developer • UI/UX • Artist
             </p>
 
             <h1 className="font-serif text-[var(--ink)] text-4xl md:text-5xl leading-tight mb-4">
@@ -36,12 +36,15 @@ export default function Hero() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3">
-              <Link
-                to="/journal"
-                className="px-6 py-3 rounded-none border border-[var(--ink)] bg-[var(--ink)] text-white text-sm font-semibold hover:opacity-90 transition"
-              >
-                View Visual Journal
-              </Link>
+              <a
+  href="https://github.com/Tarus-Jepngetich"
+  target="_blank"
+  rel="noreferrer"
+  className="px-6 py-3 rounded-none border border-[var(--ink)] bg-[var(--ink)] text-white text-sm font-semibold hover:opacity-90 transition"
+>
+  View GitHub
+</a>
+
               <a
                 href="/resume.pdf"
                 download
@@ -51,13 +54,35 @@ export default function Hero() {
               </a>
             </div>
 
-            {/* Pull quote */}
-            <div className="mt-8 border-l-4 border-[var(--mint)] pl-4">
-              <p className="font-serif italic text-[var(--ink)]">
-                “I love turning messy ideas into simple, grounded experiences.”
-              </p>
-            </div>
-          </div>
+           {/* Pull quote */}
+<div className="mt-8 border-l-4 border-[var(--mint)] pl-4">
+  <p className="font-serif italic text-[var(--ink)]">
+    “I love turning messy ideas into simple, grounded experiences.”
+  </p>
+</div>
+
+{/* Now & Next — stays inside the left column */}
+<div className="mt-6 border-t border-[var(--rule)] pt-5">
+  <p className="text-[11px] uppercase tracking-[0.28em] text-[var(--ink-soft)] mb-3">
+    Now & Next
+  </p></div>
+
+  <div className="space-y-3">
+    <p className="text-sm text-[var(--ink-soft)] leading-relaxed">
+      <span className="font-medium text-[var(--ink)]">Currently:</span> Polishing my DSA,
+      writing articles as I learn, and deep-diving into{" "}
+      <span className="italic">MongoDB</span> & <span className="italic">Node.js</span>.
+    </p>
+
+    <p className="text-sm text-[var(--ink-soft)] leading-relaxed">
+      <span className="font-medium text-[var(--ink)]">Eventually:</span> Pivoting toward{" "}
+      <span className="italic">data analysis</span> — purely out of curiosity and love for
+      patterns.
+    </p>
+  </div>
+</div>
+
+
 
           {/* Right: image “front page photo” */}
           <div className="md:col-span-5">
@@ -79,13 +104,12 @@ export default function Hero() {
               Editor’s Note
             </div>
             <p className="mt-2 text-sm text-[var(--ink-soft)] font-serif">
-              Explore sections below — projects, case studies, art, and the journal.
+              Explore sections — projects in GitHub, case studies,ui/ux, art, through the journal.
             </p>
           </div>
         </div>
 
-        {/* Page flip corner: goes to About (anchor) */}
-        <a href="#about" className="page-corner" aria-label="Flip to next page (About)" />
+        
       </div>
     </section>
   );

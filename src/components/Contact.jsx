@@ -1,4 +1,6 @@
 import Flower from "../assets/Flower.png";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+
 
 export default function Contact() {
   return (
@@ -6,9 +8,7 @@ export default function Contact() {
       {/* Newspaper page frame */}
       <div className="relative max-w-6xl mx-auto bg-white border border-[var(--rule)] shadow-[0_18px_50px_rgba(0,0,0,0.10)] overflow-hidden">
         {/* Decorative art (inside page, mid-left & mid-right) */}
-        <div className="hidden md:block absolute left-6 top-1/2 -translate-y-1/2 pointer-events-none opacity-90">
-          <img src={Flower} alt="Decorative art" className="w-36 float-slow" />
-        </div>
+        
         <div className="hidden md:block absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none opacity-90">
           <img
             src={Flower}
@@ -64,7 +64,7 @@ export default function Contact() {
                       Email
                     </span>
                     <div className="text-[var(--ink)] font-semibold">
-                      yourname@email.com
+                      mercytarus644@gmail.com
                     </div>
                   </li>
 
@@ -81,24 +81,28 @@ export default function Contact() {
                     <span className="uppercase tracking-[0.18em] text-[11px] text-[var(--ink-soft)]">
                       Links
                     </span>
-                    <div className="flex flex-col gap-1">
-                      <a
-                        href="https://github.com/"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="underline decoration-[var(--mint)] underline-offset-4 hover:opacity-80"
-                      >
-                        GitHub
-                      </a>
-                      <a
-                        href="https://www.linkedin.com/"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="underline decoration-[var(--peach)] underline-offset-4 hover:opacity-80"
-                      >
-                        LinkedIn
-                      </a>
-                    </div>
+                   <div className="flex flex-col gap-2">
+  <a
+    href="https://github.com/"
+    target="_blank"
+    rel="noreferrer"
+    className="flex items-center gap-2 underline decoration-[var(--mint)] underline-offset-4 hover:opacity-80"
+  >
+    <FaGithub className="text-lg" />
+    GitHub
+  </a>
+
+  <a
+    href="https://www.linkedin.com/"
+    target="_blank"
+    rel="noreferrer"
+    className="flex items-center gap-2 underline decoration-[var(--peach)] underline-offset-4 hover:opacity-80"
+  >
+    <FaLinkedin className="text-lg" />
+    LinkedIn
+  </a>
+</div>
+
                   </li>
                 </ul>
               </div>
@@ -121,7 +125,7 @@ export default function Contact() {
                     </span>
                     <input
                       type="text"
-                      placeholder="Tarus Gazette Reader"
+                      placeholder="Tarus Gazette Reader's Name"
                       className="px-4 py-3 border border-[var(--rule)] bg-white text-[var(--ink)] outline-none focus:ring-2 focus:ring-[var(--mint)]"
                     />
                   </label>

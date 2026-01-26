@@ -30,13 +30,7 @@ export default function Extras() {
     <section id="extras" className="bg-[var(--paper)] print-soft px-6 py-16">
       {/* Newspaper page frame */}
       <div className="relative max-w-6xl mx-auto bg-white border border-[var(--rule)] shadow-[0_18px_50px_rgba(0,0,0,0.10)] overflow-hidden">
-        {/* Decorative art (inside page) */}
-        <div className="hidden md:block absolute left-6 top-16 pointer-events-none opacity-90">
-          <img src={L6} alt="" className="w-40 float-slow" />
-        </div>
-        <div className="hidden md:block absolute right-6 bottom-16 pointer-events-none opacity-90">
-          <img src={L6} alt="" className="w-40 float-slow scale-x-[-1]" />
-        </div>
+       
 
         {/* Page header strip */}
         <div className="px-6 py-3 border-b border-[var(--rule)] flex flex-wrap items-center justify-between gap-2">
@@ -46,9 +40,16 @@ export default function Extras() {
 
           {/* Pastel stamps */}
           <div className="flex items-center gap-2">
-            <span className="px-3 py-1 text-[11px] uppercase tracking-[0.22em] border border-[var(--rule)] bg-[var(--mint)]/60 text-[var(--ink)]">
-              Medium
-            </span>
+            <a
+  href="https://medium.com/@mercytarus644"
+  target="_blank"
+  rel="noreferrer"
+  className="px-3 py-1 text-[11px] uppercase tracking-[0.22em] border border-[var(--rule)] bg-[var(--mint)]/60 text-[var(--ink)] hover:opacity-80 transition"
+  aria-label="Visit my Medium profile"
+>
+  Follow on Medium↗
+</a>
+
             <span className="px-3 py-1 text-[11px] uppercase tracking-[0.22em] border border-[var(--rule)] bg-[var(--peach)]/60 text-[var(--ink)]">
               Writing
             </span>
@@ -69,6 +70,8 @@ export default function Extras() {
             Explore my playground thoughts and life experiment journal — essays on design,
             tech, and the human side of building.
           </p>
+          
+
 
           {/* Fanned article covers */}
           <div className="relative flex justify-center items-center w-full h-[420px] group">
@@ -133,12 +136,7 @@ export default function Extras() {
           </div>
         </div>
 
-        {/* Page flip corner: jumps to Contact */}
-        <a
-          href="#contact"
-          className="page-corner"
-          aria-label="Flip to next page (Contact)"
-        />
+        
       </div>
     </section>
   );

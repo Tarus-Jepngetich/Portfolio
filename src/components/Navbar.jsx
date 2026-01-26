@@ -1,6 +1,7 @@
 import Logo from "../assets/logo.png";
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import { playPageFlip } from "../utils/sfx";
 
 const pageLinks = [
   { to: "/gazette", label: "Front Page" },
@@ -12,6 +13,7 @@ const pageLinks = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
+
 
   // Hide on scroll down, show on scroll up
   useEffect(() => {
@@ -50,7 +52,10 @@ export default function Navbar() {
         <nav className="max-w-6xl mx-auto px-6 py-3">
           {/* Top masthead row */}
           <div className="flex items-center justify-between gap-4">
-            <NavLink to="/gazette" className="flex items-center gap-3" onClick={closeMenu}>
+            <NavLink to="/gazette" className="flex items-center gap-3"   onClick={() => {
+    playPageFlip(0.18);
+    closeMenu();
+  }}>
               <img
                 src={Logo}
                 alt="Tarus logo"
@@ -137,8 +142,11 @@ export default function Navbar() {
                           `uppercase tracking-[0.18em] text-[13px] ${
                             isActive ? "font-semibold" : "font-medium"
                           } text-[var(--ink)] px-4 py-1 rounded-full hover:bg-[var(--mint)]/40`
-                        }
-                        onClick={closeMenu}
+                        }              onClick={() => {
+    playPageFlip(0.18);
+    closeMenu();
+  }}
+            
                       >
                         {link.label}
                       </NavLink>
@@ -149,7 +157,10 @@ export default function Navbar() {
                     <NavLink
                       to="/journal"
                       className="uppercase tracking-[0.18em] text-[13px] font-medium text-[var(--ink)] px-4 py-1 rounded-full hover:bg-[var(--peach)]/40"
-                      onClick={closeMenu}
+                        onClick={() => {
+    playPageFlip(0.18);
+    closeMenu();
+  }}
                     >
                       Journal
                     </NavLink>

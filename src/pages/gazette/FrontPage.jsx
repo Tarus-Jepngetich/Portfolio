@@ -1,6 +1,8 @@
 import Navbar from "../../components/Navbar";
 import Hero from "../../components/Hero";
 import PageShell from "../../components/PageShell";
+import Footer from "../../components/Footer";
+
 
 export default function FrontPage() {
   return (
@@ -9,6 +11,7 @@ export default function FrontPage() {
       <PageShell nextPath="/gazette/about" pageLabel="Front Page">
         <Hero />
       </PageShell>
+      <Footer />
     </>
   );
 }

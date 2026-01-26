@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { playPageFlip } from "../utils/sfx";
 
 export default function PageShell({
   children,
@@ -10,35 +11,35 @@ export default function PageShell({
   const navigate = useNavigate();
   const [flipping, setFlipping] = useState(false);
 
- const flipTo = (path) => {
-  if (!path || flipping) return;
+  const flipTo = (path) => {
+    if (!path || flipping) return;
 
-  setFlipping(true);
-  const go = () => navigate(path);
+    // ✅ Play sound on page change
+    playPageFlip(0.22);
 
-  if (document.startViewTransition) {
-    document.startViewTransition(() => {
+    setFlipping(true);
+    const go = () => navigate(path);
+
+    // ✅ Smooth transition (your existing approach)
+    if (document.startViewTransition) {
+      document.startViewTransition(() => {
+        go();
+      });
+      setTimeout(() => setFlipping(false), 900);
+      return;
+    }
+
+    // Fallback
+    setTimeout(() => {
       go();
-    });
-    setTimeout(() => setFlipping(false), 1400);
-    return;
-  }
-
-  setTimeout(() => {
-    go();
-    setFlipping(false);
-  }, 1400);
-};
+      setFlipping(false);
+    }, 300);
+  };
 
   return (
     <div className="bg-[var(--paper)] min-h-screen print-soft px-6 pt-28 pb-16">
-      {/* Stage gives perspective */}
       <div className="page-stage max-w-6xl mx-auto">
-        {/* The page surface that animates between routes */}
-        <div
-          className="page-sheet"
-          style={{ viewTransitionName: "gazette-page" }}
-        >
+        <div className="page-sheet" style={{ viewTransitionName: "gazette-page" }}>
           {children}
 
           {/* Flip corner (NEXT) */}

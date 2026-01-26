@@ -1,0 +1,5 @@
+[33mf6a2966[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m Major UI design changes, page routing
+[33ma297d36[m Added updated README with portfolio + visual journal integration details
+[33m124648c[m Combined it with the journal for a cleaner cohesive feel
+[33m16dd576[m ✨ UI polish: added floating PNGs, hero fixes, extras fan-out, and navbar logo
+[33m3cfc13a[m Initial commit: set up portfolio layout and styles

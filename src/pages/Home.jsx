@@ -37,11 +37,7 @@ export default function Home() {
         <Contact />
       </main>
 
-      <footer className="border-t border-[var(--rule)] bg-white">
-        <div className="max-w-6xl mx-auto px-6 py-6 text-center text-xs md:text-sm text-[var(--ink-soft)] font-serif">
-          © {new Date().getFullYear()} TARUS MERCY JEPNG'ETICH. Built with 💙 & Passion using React JS & TailwindCSS.
-        </div>
-      </footer>
+      
     </div>
   );
 }
