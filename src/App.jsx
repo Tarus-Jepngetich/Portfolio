@@ -17,13 +17,16 @@ import CategoryPage from "./Journal/components/CategoryPage";
 
 // Mobile scroll version (optional to keep)
 import Home from "./pages/Home";
+const isMobile = window.innerWidth < 768;
+
 
 export default function App() {
   return (
     <>
       <Routes>
         {/* Mobile scroll version */}
-        <Route path="/" element={<FrontPage />} />
+       <Route path="/" element={isMobile ? <Home /> : <FrontPage />} />
+
 
         {/* Gazette pages */}
         <Route path="/gazette" element={<FrontPage />} />
