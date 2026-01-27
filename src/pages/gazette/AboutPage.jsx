@@ -1,14 +1,20 @@
 import Navbar from "../../components/Navbar";
 import About from "../../components/About";
 import PageShell from "../../components/PageShell";
+import Footer from "../../components/Footer";
 
 export default function AboutPage() {
   return (
     <>
       <Navbar />
-      <PageShell prevPath="/gazette" nextPath="/gazette/extras" pageLabel="Page 2">
+      <PageShell
+        nextPath="/gazette/extras"
+        prevPath="/gazette"
+        
+      >
         <About />
       </PageShell>
+      <Footer />
     </>
   );
 }

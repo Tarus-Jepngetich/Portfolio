@@ -6,6 +6,7 @@ import AboutPage from "./pages/gazette/AboutPage";
 import ExtrasPage from "./pages/gazette/ExtrasPage";
 import ContactPage from "./pages/gazette/ContactPage";
 
+
 // Cursor (global)
 import InkCursor from "./components/InkCursor";
 

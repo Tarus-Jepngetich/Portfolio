@@ -8,7 +8,7 @@ export default function FrontPage() {
   return (
     <>
       <Navbar />
-      <PageShell nextPath="/gazette/about" pageLabel="Front Page">
+      <PageShell nextPath="/gazette/about" >
         <Hero />
       </PageShell>
       <Footer />

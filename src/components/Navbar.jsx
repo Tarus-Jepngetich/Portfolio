@@ -5,9 +5,9 @@ import { playPageFlip } from "../utils/sfx";
 
 const pageLinks = [
   { to: "/gazette", label: "Front Page" },
-  { to: "/gazette/about", label: "About" },
-  { to: "/gazette/extras", label: "Extras" },
-  { to: "/gazette/contact", label: "Contact" },
+  { to: "/gazette/About", label: "About" },
+  { to: "/gazette/Extras", label: "Extras" },
+  { to: "/gazette/Contact", label: "Contact" },
 ];
 
 export default function Navbar() {

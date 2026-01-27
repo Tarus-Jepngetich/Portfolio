@@ -5,10 +5,11 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-[80vh] md:min-h-screen flex items-center justify-center px-6 pt-32 pb-16 bg-[var(--paper)] print-soft"
+      className="relative bg-white border border-[var(--rule)] shadow-[0_18px_50px_rgba(0,0,0,0.10)] overflow-hidden "
     >
       {/* Newspaper page frame */}
-      <div className="w-full max-w-6xl bg-white border border-[var(--rule)] shadow-[0_20px_60px_rgba(0,0,0,0.12)] relative overflow-hidden">
+      <div className="bg-white border border-[var(--rule)] w-full max-w-6xl shadow-[0_20px_60px_rgba(0,0,0,0.12)] relative overflow-hidden min-h-[70vh] pb-20">
+
         {/* Top rule + date strip */}
         <div className="px-6 py-3 border-b border-[var(--rule)] flex flex-wrap items-center justify-between gap-2 text-xs text-[var(--ink-soft)]">
           <span className="uppercase tracking-[0.22em]">The Tarus Gazette</span>
@@ -43,6 +44,14 @@ export default function Hero() {
   className="px-6 py-3 rounded-none border border-[var(--ink)] bg-[var(--ink)] text-white text-sm font-semibold hover:opacity-90 transition"
 >
   View GitHub
+</a>
+   <a
+  href="https://github.com/Tarus-Jepngetich"
+  target="_blank"
+  rel="noreferrer"
+  className="px-6 py-3 rounded-none border border-[var(--ink)] text-sm font-semibold text-[var(--ink)] hover:bg-[var(--peach)]/60 transition"
+>
+  View Resume
 </a>
 
               <a
@@ -86,7 +95,8 @@ export default function Hero() {
 
           {/* Right: image “front page photo” */}
           <div className="md:col-span-5">
-            <div className="border border-[var(--rule)] overflow-hidden">
+           <div className="overflow-hidden">
+
               <img
                 src={Landing_Page}
                 alt="Tarus Gazette front image"

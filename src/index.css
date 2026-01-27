@@ -131,6 +131,138 @@ body.ink-hover .ink-trail {
     display: none;
   }
 }
+/* ===== Page sheet base (optional but recommended) ===== */
+.page-sheet {
+  position: relative;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+/* ===== Bottom-right page fold (NEXT) ===== */
+.page-fold {
+  position: absolute;
+  right: 14px;
+  bottom: 10px;
+  width: 54px;
+  height: 54px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  z-index: 5;
+}
+
+/* The folded triangle */
+.page-fold::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  filter: brightness(0.98) contrast(1.02);
+
+  background: linear-gradient(
+  135deg,
+  rgba(255,255,255,0) 52%,
+  rgba(247,198,184,0.9) 52%
+);
+
+  box-shadow: 0 10px 24px rgba(0,0,0,0.10);
+  border: 1px solid rgba(0,0,0,0.08);
+  transform: translateZ(0);
+}
+
+/* A subtle paper highlight on top of the fold */
+.page-fold::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  opacity: 0.45;
+   background: linear-gradient(
+  135deg,
+  rgba(255,255,255,0) 52%,
+  rgba(191,230,213,0.9) 52%
+);
+
+  mix-blend-mode: soft-light;
+  opacity: 0.9;
+}
+
+/* Hover lift */
+.page-fold:hover::before {
+  transform: translateY(-2px);
+  transition: transform 180ms ease;
+}
+/* ===== Micro flip animation for the page fold ===== */
+
+/* Make the fold feel 3D */
+.page-fold {
+  transform-origin: right bottom;
+  transform: translateZ(0);
+}
+
+/* The folded triangle (your main fold) */
+.page-fold::before {
+  transform-origin: right bottom;
+  transition:
+    transform 180ms ease,
+    filter 180ms ease,
+    box-shadow 180ms ease;
+  will-change: transform;
+}
+
+/* Hover = tiny “lift + curl” */
+.page-fold:hover::before {
+  transform: rotate(-2deg) translate(-2px, -2px);
+  filter: brightness(1.03);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.14);
+}
+
+/* Active (mouse down) = quick “tap” */
+.page-fold:active::before {
+  transform: rotate(-6deg) translate(-1px, -1px) scale(0.98);
+  filter: brightness(0.98);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+}
+
+/* Optional: a tiny shimmer line (no white triangle split) */
+.page-fold::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 180ms ease, transform 180ms ease;
+  transform-origin: right bottom;
+  /* subtle edge sheen */
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.16);
+}
+
+.page-fold:hover::after {
+  opacity: 1;
+  transform: rotate(-2deg) translate(-2px, -2px);
+}
+
+/* ===== Click flip micro-animation ===== */
+.page-sheet.is-flipping {
+  transform-origin: right bottom;
+  animation: pageTurn 260ms ease-in-out both;
+}
+
+@keyframes pageTurn {
+  from { transform: perspective(900px) rotateY(0deg); }
+  to   { transform: perspective(900px) rotateY(-6deg); }
+}
+
+/* Mobile: hide fold (tap areas can be annoying on small screens) */
+@media (max-width: 768px) {
+  .page-fold { display: none; }
+}
+
 
 
 
