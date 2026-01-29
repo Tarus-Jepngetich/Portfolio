@@ -5,6 +5,8 @@ import FrontPage from "./pages/gazette/FrontPage";
 import AboutPage from "./pages/gazette/AboutPage";
 import ExtrasPage from "./pages/gazette/ExtrasPage";
 import ContactPage from "./pages/gazette/ContactPage";
+import CertificationsPage from "./pages/gazette/CertificationsPage";
+
 
 
 // Cursor (global)
@@ -32,6 +34,7 @@ export default function App() {
         <Route path="/gazette" element={<FrontPage />} />
         <Route path="/gazette/about" element={<AboutPage />} />
         <Route path="/gazette/extras" element={<ExtrasPage />} />
+        <Route path="/gazette/certifications" element={<CertificationsPage />} />
         <Route path="/gazette/contact" element={<ContactPage />} />
 
         {/* Journal */}

@@ -11,29 +11,27 @@ html {
   --ink-soft: #333333;
   --rule: #d7d2c7;
 
-  /* Pastel accents (B) */
   --mint: #bfe6d5;
   --peach: #f7c6b8;
 }
 
-/* Make the whole site feel like paper + ink */
+/* Global paper feel */
 body {
   background: var(--paper);
   color: var(--ink);
 }
 
-/* A classic newspaper “rule line” utility */
+/* Newspaper rule line */
 .rule {
   border-top: 1px solid var(--rule);
 }
 
-/* Optional: slight printed feel */
 .print-soft {
   text-rendering: geometricPrecision;
   -webkit-font-smoothing: antialiased;
 }
 
-/* --- Your existing animations --- */
+/* --- Floating decorative art --- */
 @keyframes float-slow {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-12px); }
@@ -46,12 +44,7 @@ body {
 }
 .float-slow-alt { animation: float-slow-alt 7s ease-in-out infinite; }
 
-@keyframes fade-in {
-  0% { opacity: 0; transform: translateY(10px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-.fade-in { animation: fade-in 1.2s ease-out forwards; }
-/* Makes route changes feel like a classy paper transition */
+/* --- Page transitions --- */
 @media (prefers-reduced-motion: no-preference) {
   ::view-transition-old(gazette-page) {
     animation: 200ms ease-out both fadeOut;
@@ -70,68 +63,64 @@ body {
     to   { opacity: 1; transform: translateY(0); filter: blur(0); }
   }
 }
-/* Hide the default cursor when the ink cursor is active */
+
+/* =======================================================
+   INK CURSOR (FIXED + ALWAYS VISIBLE)
+======================================================= */
 html, body {
   cursor: none;
 }
 
-/* Keep pointer cursor for inputs if you want (optional) */
 input, textarea {
   cursor: text;
 }
 
-/* ===== Ink Pen Cursor ===== */
 .ink-dot,
 .ink-trail {
   position: fixed;
   top: 0;
   left: 0;
   pointer-events: none;
-  z-index: 9999;
-  transform: translate3d(-100px, -100px, 0);
+  z-index: 9999999;
   opacity: 1;
-  transition: opacity 120ms ease;
+  will-change: transform;
 }
 
-/* The “nib” dot */
+/* Solid ink nib */
 .ink-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 999px;
-  background: rgba(20, 20, 20, 0.85);
-  box-shadow: 0 0 0 1px rgba(20, 20, 20, 0.08);
-  mix-blend-mode: multiply;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(15, 15, 15, 0.95);
 }
 
-/* The “ink drag” trail */
+/* Soft ink bleed */
 .ink-trail {
-  width: 28px;
-  height: 28px;
-  border-radius: 999px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
   background: radial-gradient(
     circle at 35% 35%,
-    rgba(20, 20, 20, 0.18),
-    rgba(20, 20, 20, 0.06) 45%,
-    rgba(20, 20, 20, 0) 70%
+    rgba(15,15,15,0.22),
+    rgba(15,15,15,0.08) 45%,
+    rgba(15,15,15,0) 70%
   );
-  filter: blur(0.2px);
-  mix-blend-mode: multiply;
+  filter: blur(0.4px);
 }
 
+/* Hover expansion */
 body.ink-hover .ink-trail {
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
 }
 
-
-/* Hide on small screens / touch-like layouts just in case */
+/* Disable on touch devices */
 @media (max-width: 768px) {
-  .ink-dot,
-  .ink-trail {
-    display: none;
-  }
+  .ink-dot, .ink-trail { display: none; }
+  html, body { cursor: auto; }
 }
-/* ===== Page sheet base (optional but recommended) ===== */
+
+/* --- Page shell --- */
 .page-sheet {
   position: relative;
   background: var(--paper);
@@ -141,105 +130,60 @@ body.ink-hover .ink-trail {
   overflow: hidden;
 }
 
-/* ===== Bottom-right page fold (NEXT) ===== */
+/* --- Page fold micro interaction --- */
 .page-fold {
   position: absolute;
   right: 14px;
   bottom: 10px;
-  width: 54px;
-  height: 54px;
-  border: 0;
+  width: 48px;
+  height: 48px;
+  border: none;
   background: transparent;
   cursor: pointer;
   padding: 0;
   z-index: 5;
+  transform-origin: right bottom;
 }
 
-/* The folded triangle */
+/* Fold triangle (no white split) */
 .page-fold::before {
   content: "";
   position: absolute;
   inset: 0;
-  border-radius: 12px;
-  filter: brightness(0.98) contrast(1.02);
-
+  border-radius: 10px;
   background: linear-gradient(
-  135deg,
-  rgba(255,255,255,0) 52%,
-  rgba(247,198,184,0.9) 52%
-);
-
+    135deg,
+    rgba(255,255,255,0) 55%,
+    rgba(247,198,184,0.9) 55%
+  );
   box-shadow: 0 10px 24px rgba(0,0,0,0.10);
   border: 1px solid rgba(0,0,0,0.08);
-  transform: translateZ(0);
+  transition: transform 180ms ease, filter 180ms ease, box-shadow 180ms ease;
 }
 
-/* A subtle paper highlight on top of the fold */
-.page-fold::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 12px;
-  opacity: 0.45;
-   background: linear-gradient(
-  135deg,
-  rgba(255,255,255,0) 52%,
-  rgba(191,230,213,0.9) 52%
-);
-
-  mix-blend-mode: soft-light;
-  opacity: 0.9;
-}
-
-/* Hover lift */
-.page-fold:hover::before {
-  transform: translateY(-2px);
-  transition: transform 180ms ease;
-}
-/* ===== Micro flip animation for the page fold ===== */
-
-/* Make the fold feel 3D */
-.page-fold {
-  transform-origin: right bottom;
-  transform: translateZ(0);
-}
-
-/* The folded triangle (your main fold) */
-.page-fold::before {
-  transform-origin: right bottom;
-  transition:
-    transform 180ms ease,
-    filter 180ms ease,
-    box-shadow 180ms ease;
-  will-change: transform;
-}
-
-/* Hover = tiny “lift + curl” */
+/* Hover curl */
 .page-fold:hover::before {
   transform: rotate(-2deg) translate(-2px, -2px);
-  filter: brightness(1.03);
+  filter: brightness(1.04);
   box-shadow: 0 14px 30px rgba(0,0,0,0.14);
 }
 
-/* Active (mouse down) = quick “tap” */
+/* Active tap */
 .page-fold:active::before {
   transform: rotate(-6deg) translate(-1px, -1px) scale(0.98);
-  filter: brightness(0.98);
-  box-shadow: 0 10px 22px rgba(0,0,0,0.12);
 }
 
-/* Optional: a tiny shimmer line (no white triangle split) */
+/* Shimmer edge */
 .page-fold::after {
   content: "";
   position: absolute;
   inset: 0;
-  border-radius: 12px;
+  border-radius: 10px;
   pointer-events: none;
   opacity: 0;
   transition: opacity 180ms ease, transform 180ms ease;
   transform-origin: right bottom;
-  /* subtle edge sheen */
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.16);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.18);
 }
 
 .page-fold:hover::after {
@@ -247,7 +191,7 @@ body.ink-hover .ink-trail {
   transform: rotate(-2deg) translate(-2px, -2px);
 }
 
-/* ===== Click flip micro-animation ===== */
+/* Page micro-flip */
 .page-sheet.is-flipping {
   transform-origin: right bottom;
   animation: pageTurn 260ms ease-in-out both;
@@ -258,27 +202,106 @@ body.ink-hover .ink-trail {
   to   { transform: perspective(900px) rotateY(-6deg); }
 }
 
-/* Mobile: hide fold (tap areas can be annoying on small screens) */
 @media (max-width: 768px) {
   .page-fold { display: none; }
 }
 
+/* =======================================================
+   CERTIFICATIONS – SUBWAY DRAW + MINI GRID (WORKING)
+======================================================= */
 
-
-
-/* --- A simple “page corner” button look --- 
-.page-corner {
-  position: absolute;
-  right: 18px;
-  bottom: 18px;
-  width: 64px;
-  height: 64px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, rgba(0,0,0,0) 50%, var(--peach) 50%);
-  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
-  border: 1px solid rgba(0,0,0,0.08);
+/* Ensures absolute svg positioning works properly */
+.subway-wrap {
+  position: relative;
 }
-.page-corner:hover {
-  transform: translateY(-2px);
-  transition: transform 200ms ease;
-}*/
+
+/* SVG subway curve */
+.subway-svg {
+  position: absolute;
+  left: 50%;
+  top: 170px;               /* start below heading */
+  bottom: 40px;             /* stretch to bottom reliably */
+  transform: translateX(-50%);
+  width: 340px;
+  height: auto;
+  pointer-events: none;
+  z-index: 1;               /* behind cards */
+  opacity: 0.85;
+  overflow: visible;
+}
+
+/* Glow line */
+#subway-path {
+  stroke-linecap: round;
+  filter:
+    drop-shadow(0 0 6px rgba(191,230,213,0.65))
+    drop-shadow(0 0 12px rgba(247,198,184,0.45));
+}
+
+/* Grid wrapper above SVG */
+.subway-track {
+  position: relative;
+  z-index: 2;
+  margin: 0 auto;
+  padding-bottom: 60px;
+  max-width: 900px;
+}
+
+/* Mini cards */
+.mini-card {
+  position: relative;
+  z-index: 2;
+  background: rgba(250, 247, 240, 0.92);
+  border: 1px solid var(--rule);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.10);
+  padding: 14px 14px 14px 44px;
+  overflow: hidden;
+
+  opacity: 0;
+  transform: translateY(24px);
+  transition: all 650ms cubic-bezier(.22,.68,0,1);
+}
+
+/* Reveal */
+.mini-card.active-node {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Station dot */
+.mini-dot {
+  position: absolute;
+  left: 14px;
+  top: 16px;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: var(--mint);
+  box-shadow: 0 0 0 6px rgba(191,230,213,0.25);
+  transition: all 600ms cubic-bezier(.22,.68,0,1);
+}
+
+/* Glow when active */
+.mini-card.active-node .mini-dot {
+  background: var(--peach);
+  box-shadow:
+    0 0 0 8px rgba(247,198,184,0.35),
+    0 0 18px rgba(247,198,184,0.55);
+}
+
+/* Tiny verified pill */
+.mini-pill {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--mint);
+  box-shadow: 0 0 0 4px rgba(191,230,213,0.22);
+}
+
+/* Text clamp helper */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

@@ -6,7 +6,8 @@ import { playPageFlip } from "../utils/sfx";
 const pageLinks = [
   { to: "/gazette", label: "Front Page" },
   { to: "/gazette/About", label: "About" },
-  { to: "/gazette/Extras", label: "Extras" },
+  { to: "/gazette/Extras", label: "Writing" },
+  { to: "/gazette/certifications", label: "Certifications" },
   { to: "/gazette/Contact", label: "Contact" },
 ];
 
@@ -125,7 +126,7 @@ export default function Navbar() {
                     textUnderlineOffset: "4px",
                   }}
                 >
-                  Journal
+                  Portfolio
                 </NavLink>
               </li>
             </ul>
