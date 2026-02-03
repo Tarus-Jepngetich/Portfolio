@@ -3,9 +3,11 @@ import { Routes, Route } from "react-router-dom";
 // Gazette pages
 import FrontPage from "./pages/gazette/FrontPage";
 import AboutPage from "./pages/gazette/AboutPage";
+import ExperiencePractice from "./pages/gazette/ExperiencePracticePage";
+import CertificationsPage from "./pages/gazette/CertificationsPage";
 import ExtrasPage from "./pages/gazette/ExtrasPage";
 import ContactPage from "./pages/gazette/ContactPage";
-import CertificationsPage from "./pages/gazette/CertificationsPage";
+
 
 
 
@@ -33,8 +35,10 @@ export default function App() {
         {/* Gazette pages */}
         <Route path="/gazette" element={<FrontPage />} />
         <Route path="/gazette/about" element={<AboutPage />} />
-        <Route path="/gazette/extras" element={<ExtrasPage />} />
+        <Route path="/gazette/experiencePractice" element={<ExperiencePractice />} />
+        
         <Route path="/gazette/certifications" element={<CertificationsPage />} />
+        <Route path="/gazette/extras" element={<ExtrasPage />} />
         <Route path="/gazette/contact" element={<ContactPage />} />
 
         {/* Journal */}

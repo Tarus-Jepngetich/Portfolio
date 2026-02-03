@@ -6,8 +6,9 @@ import { playPageFlip } from "../utils/sfx";
 const pageLinks = [
   { to: "/gazette", label: "Front Page" },
   { to: "/gazette/About", label: "About" },
+  { to: "/gazette/ExperiencePractice", label: "Experience" },
+  { to: "/gazette/Certifications", label: "Credentials" },
   { to: "/gazette/Extras", label: "Writing" },
-  { to: "/gazette/certifications", label: "Credentials" },
   { to: "/gazette/Contact", label: "Contact" },
 ];
 
@@ -15,9 +16,21 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
 
+  // ✅ Hide navbar completely when a modal is open (certificate viewer)
+  const isModalOpen =
+    typeof document !== "undefined" &&
+    document.body.classList.contains("modal-open");
+
+  // Close mobile menu if modal opens (prevents weird states)
+  useEffect(() => {
+    if (isModalOpen) setIsOpen(false);
+  }, [isModalOpen]);
 
   // Hide on scroll down, show on scroll up
   useEffect(() => {
+    // ✅ don't run scroll behavior when navbar is not rendered
+    if (isModalOpen) return;
+
     let lastY = window.scrollY;
 
     const handleScroll = () => {
@@ -39,9 +52,16 @@ export default function Navbar() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isOpen]);
+  }, [isOpen, isModalOpen]);
 
   const closeMenu = () => setIsOpen(false);
+
+  const linkBase =
+    "px-3 py-1.5 border border-[var(--rule)] rounded-md transition";
+  const linkText = "uppercase tracking-[0.18em] text-[11px]";
+
+  // ✅ If modal is open, do not render navbar at all
+  if (isModalOpen) return null;
 
   return (
     <header
@@ -53,10 +73,14 @@ export default function Navbar() {
         <nav className="max-w-6xl mx-auto px-6 py-3">
           {/* Top masthead row */}
           <div className="flex items-center justify-between gap-4">
-            <NavLink to="/gazette" className="flex items-center gap-3"   onClick={() => {
-    playPageFlip(0.18);
-    closeMenu();
-  }}>
+            <NavLink
+              to="/gazette"
+              className="flex items-center gap-3"
+              onClick={() => {
+                playPageFlip(0.18);
+                closeMenu();
+              }}
+            >
               <img
                 src={Logo}
                 alt="Tarus logo"
@@ -93,20 +117,19 @@ export default function Navbar() {
 
           {/* Edition strip / nav links */}
           <div className="mt-3 border-t border-[var(--rule)] pt-2">
-            <ul className="hidden md:flex flex-wrap gap-x-6 gap-y-2 items-center text-[13px]">
+            <ul className="hidden md:flex flex-wrap gap-2 items-center">
               {pageLinks.map((link) => (
                 <li key={link.to}>
                   <NavLink
                     to={link.to}
+                    onClick={() => playPageFlip(0.18)}
                     className={({ isActive }) =>
-                      `uppercase tracking-[0.18em] ${
-                        isActive ? "font-semibold underline" : "font-medium"
-                      } text-[var(--ink)] hover:opacity-80`
+                      `${linkBase} ${linkText} ${
+                        isActive
+                          ? "bg-[var(--peach)]/30 text-[var(--ink)]"
+                          : "bg-white/40 text-[var(--ink-soft)] hover:bg-[var(--mint)]/25"
+                      }`
                     }
-                    style={{
-                      textDecorationColor: "var(--peach)",
-                      textUnderlineOffset: "4px",
-                    }}
                   >
                     {link.label}
                   </NavLink>
@@ -116,15 +139,14 @@ export default function Navbar() {
               <li className="ml-auto">
                 <NavLink
                   to="/journal"
+                  onClick={() => playPageFlip(0.18)}
                   className={({ isActive }) =>
-                    `uppercase tracking-[0.18em] ${
-                      isActive ? "font-semibold underline" : "font-medium"
-                    } text-[var(--ink)] hover:opacity-80`
+                    `${linkBase} ${linkText} ${
+                      isActive
+                        ? "bg-[var(--mint)]/30 text-[var(--ink)]"
+                        : "bg-white/40 text-[var(--ink-soft)] hover:bg-[var(--peach)]/25"
+                    }`
                   }
-                  style={{
-                    textDecorationColor: "var(--mint)",
-                    textUnderlineOffset: "4px",
-                  }}
                 >
                   Portfolio
                 </NavLink>
@@ -134,20 +156,22 @@ export default function Navbar() {
             {/* Mobile dropdown */}
             {isOpen && (
               <div className="md:hidden pt-3">
-                <ul className="flex flex-col items-center space-y-2 pb-3">
+                <ul className="flex flex-col items-center gap-2 pb-3">
                   {pageLinks.map((link) => (
                     <li key={link.to}>
                       <NavLink
                         to={link.to}
                         className={({ isActive }) =>
-                          `uppercase tracking-[0.18em] text-[13px] ${
-                            isActive ? "font-semibold" : "font-medium"
-                          } text-[var(--ink)] px-4 py-1 rounded-full hover:bg-[var(--mint)]/40`
-                        }              onClick={() => {
-    playPageFlip(0.18);
-    closeMenu();
-  }}
-            
+                          `${linkBase} ${linkText} text-[13px] ${
+                            isActive
+                              ? "bg-[var(--peach)]/30 text-[var(--ink)]"
+                              : "bg-white/50 text-[var(--ink-soft)] hover:bg-[var(--mint)]/25"
+                          }`
+                        }
+                        onClick={() => {
+                          playPageFlip(0.18);
+                          closeMenu();
+                        }}
                       >
                         {link.label}
                       </NavLink>
@@ -157,11 +181,11 @@ export default function Navbar() {
                   <li>
                     <NavLink
                       to="/journal"
-                      className="uppercase tracking-[0.18em] text-[13px] font-medium text-[var(--ink)] px-4 py-1 rounded-full hover:bg-[var(--peach)]/40"
-                        onClick={() => {
-    playPageFlip(0.18);
-    closeMenu();
-  }}
+                      className={`${linkBase} ${linkText} text-[13px] bg-white/50 text-[var(--ink-soft)] hover:bg-[var(--peach)]/25`}
+                      onClick={() => {
+                        playPageFlip(0.18);
+                        closeMenu();
+                      }}
                     >
                       Journal
                     </NavLink>
