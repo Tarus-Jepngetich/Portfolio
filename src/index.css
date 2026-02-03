@@ -207,7 +207,8 @@ body.ink-hover .ink-trail {
 }
 
 /* =======================================================
-   CERTIFICATIONS – SUBWAY DRAW + MINI GRID (WORKING)
+   CERTIFICATIONS – SUBWAY DRAW + MINI GRID (UPDATED)
+   (Keeps your aesthetic + allows full descriptions + bulletin-sized cards)
 ======================================================= */
 
 /* Ensures absolute svg positioning works properly */
@@ -247,7 +248,7 @@ body.ink-hover .ink-trail {
   max-width: 900px;
 }
 
-/* Mini cards */
+/* Mini cards (default look stays intact) */
 .mini-card {
   position: relative;
   z-index: 2;
@@ -298,10 +299,45 @@ body.ink-hover .ink-trail {
   box-shadow: 0 0 0 4px rgba(191,230,213,0.22);
 }
 
-/* Text clamp helper */
+/* Text clamp helper (keep for other pages if needed) */
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+/* =======================================================
+   NEW: Training Ledger cards “Bulletin-sized”
+   Use: className="mini-card mini-card--tall"
+======================================================= */
+
+.mini-card--tall{
+  /* Match the more “bulletin” spacing without losing your look */
+  padding: 20px 18px 18px 52px;        /* more room + keep dot gutter */
+  min-height: 180px;                   /* consistent card size */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* Keep dot aligned with taller padding */
+.mini-card--tall .mini-dot{
+  top: 20px;
+  left: 16px;
+}
+
+/* Body wrapper (optional, but helps structure) */
+.mini-card--tall .mini-body{
+  flex: 1;
+}
+
+/* Footer pinned to bottom like newspaper cards */
+.mini-card--tall .mini-footer{
+  margin-top: 12px;
+}
+
+/* If a description is long, it will wrap nicely */
+.mini-card--tall p{
+  overflow-wrap: anywhere;
 }

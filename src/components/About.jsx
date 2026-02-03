@@ -44,8 +44,8 @@ export default function About() {
         </h2>
 
         <p className="font-serif text-center text-[var(--ink-soft)] max-w-2xl mx-auto mb-10">
-          A web developer, UI/UX designer, and artist — I build with structure,
-          clarity, and a little softness.
+          I’m a multi-passionate builder at heart — majoring in web development, deeply curious about UI/UX and data analysis, 
+          and an art hobbyist who loves turning ideas into visuals.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
@@ -62,7 +62,7 @@ export default function About() {
                 </li>
                 <li>
                   <span className="font-semibold text-[var(--ink)]">Focus:</span>{" "}
-                  React • Tailwind • UI Systems
+                  MERN • Design • UI Systems
                 </li>
                 <li>
                   <span className="font-semibold text-[var(--ink)]">Style:</span>{" "}
@@ -85,8 +85,8 @@ export default function About() {
           <div className="md:col-span-8">
             <div className="columns-1 md:columns-2 gap-10 font-serif text-[var(--ink)] leading-relaxed">
               <p className="mb-4">
-                I’m Tarus — a web developer, UI/UX designer, and artist who finds
-                beauty in structure, simplicity, and creativity. I enjoy building
+                I’m Tarus — a web developer who finds beauty in structure, 
+                simplicity, and creativity. I enjoy building
                 interfaces that feel clear and calm, but also human.
               </p>
 
@@ -99,7 +99,7 @@ export default function About() {
 
               <p className="mb-4">
                 Outside of tech, I sketch and illustrate — and I write small
-                reflections in my journal. Those “extras” keep my work warm and
+                reflections in my journal. Those “writting's” keep my work warm and
                 intentional.
               </p>
 

@@ -7,7 +7,7 @@ const pageLinks = [
   { to: "/gazette", label: "Front Page" },
   { to: "/gazette/About", label: "About" },
   { to: "/gazette/Extras", label: "Writing" },
-  { to: "/gazette/certifications", label: "Certifications" },
+  { to: "/gazette/certifications", label: "Credentials" },
   { to: "/gazette/Contact", label: "Contact" },
 ];
 

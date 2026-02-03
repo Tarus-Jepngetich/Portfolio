@@ -114,7 +114,7 @@ export default function Hero() {
               Editor’s Note
             </div>
             <p className="mt-2 text-sm text-[var(--ink-soft)] font-serif">
-              Explore sections — projects in GitHub, case studies,ui/ux, art, through the journal.
+              Explore sections — projects in GitHub, case studies,ui/ux, art, through the portfolio section.
             </p>
           </div>
         </div>
