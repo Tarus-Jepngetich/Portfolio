@@ -132,12 +132,20 @@ export default function Certifications() {
   }, []);
 
   /* ✅ Hide Navbar when modal is open */
-  useEffect(() => {
-    if (activeCert) document.body.classList.add("modal-open");
-    else document.body.classList.remove("modal-open");
+/* ✅ Hide Navbar when modal is open (reactive) */
+useEffect(() => {
+  if (activeCert) document.body.classList.add("modal-open");
+  else document.body.classList.remove("modal-open");
 
-    return () => document.body.classList.remove("modal-open");
-  }, [activeCert]);
+  // 🔥 notify Navbar to re-render immediately
+  window.dispatchEvent(new Event("modal-open-change"));
+
+  return () => {
+    document.body.classList.remove("modal-open");
+    window.dispatchEvent(new Event("modal-open-change"));
+  };
+}, [activeCert]);
+
 
   return (
     <div

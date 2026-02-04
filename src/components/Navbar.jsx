@@ -16,19 +16,36 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
 
-  // ✅ Hide navbar completely when a modal is open (certificate viewer)
-  const isModalOpen =
-    typeof document !== "undefined" &&
-    document.body.classList.contains("modal-open");
+  // ✅ reactive modal state
+  const [isModalOpen, setIsModalOpen] = useState(() => {
+    if (typeof document === "undefined") return false;
+    return document.body.classList.contains("modal-open");
+  });
 
-  // Close mobile menu if modal opens (prevents weird states)
+  // ✅ listen for modal open/close changes
+  useEffect(() => {
+    const sync = () => {
+      setIsModalOpen(document.body.classList.contains("modal-open"));
+    };
+
+    window.addEventListener("modal-open-change", sync);
+
+    // optional safety: sync on focus (if you alt-tab etc.)
+    window.addEventListener("focus", sync);
+
+    return () => {
+      window.removeEventListener("modal-open-change", sync);
+      window.removeEventListener("focus", sync);
+    };
+  }, []);
+
+  // Close mobile menu if modal opens
   useEffect(() => {
     if (isModalOpen) setIsOpen(false);
   }, [isModalOpen]);
 
   // Hide on scroll down, show on scroll up
   useEffect(() => {
-    // ✅ don't run scroll behavior when navbar is not rendered
     if (isModalOpen) return;
 
     let lastY = window.scrollY;
@@ -60,7 +77,7 @@ export default function Navbar() {
     "px-3 py-1.5 border border-[var(--rule)] rounded-md transition";
   const linkText = "uppercase tracking-[0.18em] text-[11px]";
 
-  // ✅ If modal is open, do not render navbar at all
+  // ✅ If modal is open, hide navbar completely
   if (isModalOpen) return null;
 
   return (
