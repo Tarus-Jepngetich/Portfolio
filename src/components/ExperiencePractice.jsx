@@ -1,6 +1,7 @@
 export default function ExperiencePractice() {
   return (
-    <section className=" page-sheet p-8 md:p-14">
+    <section className=" page-sheet p-8 md:p-14"  style={{ background: "#ffffff" }}>
+       
       {/* Masthead */}
       <div className=" text-center mb-14">
         <p className="text-[10px] uppercase tracking-[0.35em] text-[var(--ink-soft)]">
