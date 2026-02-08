@@ -44,7 +44,7 @@ export default function About() {
         </h2>
 
         <p className="font-serif text-center text-[var(--ink-soft)] max-w-2xl mx-auto mb-10">
-          I’m a multi-passionate builder at heart — majoring in web development, deeply curious about UI/UX and data analysis, 
+          I’m a multi-passionate builder at heart — majoring in software development, currently knee ddep in web development and deeply curious about UI/UX and data analysis, 
           and an art hobbyist who loves turning ideas into visuals.
         </p>
 

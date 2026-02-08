@@ -55,7 +55,7 @@ export default function Hero() {
 </a>
 
               <a
-                href="/resume.pdf"
+                href="/certificates/Mercy Tarus_Resume.pdf"
                 download
                 className="px-6 py-3 rounded-none border border-[var(--ink)] text-sm font-semibold text-[var(--ink)] hover:bg-[var(--peach)]/60 transition"
               >
