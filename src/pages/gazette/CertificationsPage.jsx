@@ -10,8 +10,8 @@ export default function CertificationsPage() {
       <Navbar />
 
       <PageShell
-        prevPath="/gazette/extras"
-        nextPath="/gazette/contact"
+        prevPath="/gazette/experiencePage"
+        nextPath="/gazette/extras"
         pageLabel="Certifications"
       >
         <Certifications />

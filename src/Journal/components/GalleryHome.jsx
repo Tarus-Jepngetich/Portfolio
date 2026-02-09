@@ -1,12 +1,20 @@
 // src/journal/components/GalleryHome.jsx
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import HeaderCard from "./HeaderCard";
 import { TABS, PROJECT_GROUPS } from "../data/galleryData";
 
 export default function GalleryHome() {
   const [activeTab, setActiveTab] = useState("graphic");
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Restore the tab when coming back from CategoryPage
+  useEffect(() => {
+    const incomingTab = location.state?.activeTab;
+    if (incomingTab) setActiveTab(incomingTab);
+  }, [location.state]);
+
   const projects = PROJECT_GROUPS[activeTab];
 
   return (
@@ -43,18 +51,30 @@ export default function GalleryHome() {
                 className="group flex flex-col justify-between rounded-xl border border-slate-700/60 bg-slate-900/80 p-4 shadow-sm hover:border-sky-400 hover:shadow-lg transition"
               >
                 <div>
-                  <p className="text-[11px] uppercase tracking-[0.2em] text-slate-400">{project.kind}</p>
-                  <h3 className="mt-1 text-sm font-semibold text-slate-50">{project.title}</h3>
-                  <p className="mt-2 text-xs text-slate-300 leading-relaxed">{project.description}</p>
+                  <p className="text-[11px] uppercase tracking-[0.2em] text-slate-400">
+                    {project.kind}
+                  </p>
+                  <h3 className="mt-1 text-sm font-semibold text-slate-50">
+                    {project.title}
+                  </h3>
+                  <p className="mt-2 text-xs text-slate-300 leading-relaxed">
+                    {project.description}
+                  </p>
                 </div>
 
                 <button
                   type="button"
-                  onClick={() => navigate(`/journal/category/${project.id}`)}
+                  onClick={() =>
+                    navigate(`/journal/category/${project.id}`, {
+                      state: { fromTab: activeTab },
+                    })
+                  }
                   className="mt-4 inline-flex items-center justify-between text-[11px] font-medium text-sky-300 group-hover:text-sky-200"
                 >
                   <span>View projects</span>
-                  <span className="ml-2 transition-transform group-hover:translate-x-0.5">↗</span>
+                  <span className="ml-2 transition-transform group-hover:translate-x-0.5">
+                    ↗
+                  </span>
                 </button>
               </article>
             ))}
@@ -65,7 +85,8 @@ export default function GalleryHome() {
             <span className="font-semibold text-sky-300">
               {TABS.find((tab) => tab.id === activeTab)?.label}
             </span>
-            . Use the deep blue tabs to switch between Graphic Design, UI/UX, and Art.
+            . Use the deep blue tabs to switch between Graphic Design, UI/UX, and
+            Art.
           </p>
         </div>
       </section>

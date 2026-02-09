@@ -8,7 +8,7 @@ export default function AboutPage() {
     <>
       <Navbar />
       <PageShell
-        nextPath="/gazette/extras"
+        nextPath="/gazette/experiencePractice"
         prevPath="/gazette"
         
       >

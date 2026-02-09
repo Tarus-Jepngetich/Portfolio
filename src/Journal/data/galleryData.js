@@ -2,6 +2,8 @@
 
 // Tabs along the top
 export const TABS = [
+  { id: "software development", label: "Software Development" },
+  { id: "data analysis", label: "Data Analysis" },
   { id: "graphic", label: "Graphic Design" },
   { id: "uiux", label: "UI/UX" },
   { id: "art", label: "Art" },
@@ -9,6 +11,56 @@ export const TABS = [
 
 // Groups of project "categories" inside each tab
 export const PROJECT_GROUPS = {
+  // ✅ Documentation-first Software Development
+  "software development": [
+    {
+      id: "dev-journal",
+      title: "Development Journal",
+      description:
+        "Ongoing notes that capture how ideas evolve—questions, decisions, missteps, and small breakthroughs.",
+      kind: "Journal",
+    },
+    {
+      id: "process-docs",
+      title: "Process & Documentation",
+      description:
+        "How I break problems down, document assumptions, and move from thought to structure.",
+      kind: "Process",
+    },
+    {
+      id: "learning-notes",
+      title: "Learning Notes",
+      description:
+        "Short, honest write-ups on what I’m learning—concepts, patterns, and things I wish I knew earlier.",
+      kind: "Notes",
+    },
+  ],
+
+  // ✅ Data Analysis tab
+  "data analysis": [
+    {
+      id: "eda-notebooks",
+      title: "EDA Notebooks",
+      description:
+        "Exploratory data analysis: cleaning, inspecting patterns, and finding meaningful signals.",
+      kind: "EDA",
+    },
+    {
+      id: "data-cleaning",
+      title: "Data Cleaning & Preparation",
+      description:
+        "Transforming raw data into usable datasets—handling missing values, formatting, and consistency.",
+      kind: "Prep",
+    },
+    {
+      id: "insights-storytelling",
+      title: "Insights & Storytelling",
+      description:
+        "Turning analysis into decisions: summaries, visuals, and takeaways that are easy to understand.",
+      kind: "Insights",
+    },
+  ],
+
   graphic: [
     {
       id: "illustrator",
@@ -23,6 +75,7 @@ export const PROJECT_GROUPS = {
       kind: "Photoshop",
     },
   ],
+
   uiux: [
     {
       id: "ui-design",
@@ -43,6 +96,7 @@ export const PROJECT_GROUPS = {
       kind: "Wireframes",
     },
   ],
+
   art: [
     {
       id: "digital-art",
@@ -73,6 +127,164 @@ export const PROJECT_GROUPS = {
 
 // Detail page content per category card
 export const CATEGORY_PAGES = {
+  // ✅ Documentation-first Software Development pages
+  "dev-journal": {
+    title: "Development Journal",
+    intro:
+      "A running record of how my software ideas take shape. This space captures thought process, uncertainty, and progress—without polishing the edges.",
+    sections: [
+      {
+        heading: "What Gets Documented",
+        items: [
+          "Initial ideas and problem framing",
+          "Questions I’m still figuring out",
+          "Small decisions and their reasoning",
+          "Reflections after building or refactoring",
+        ],
+      },
+      {
+        heading: "Why I Keep This",
+        items: [
+          "To slow down and think clearly",
+          "To make learning visible",
+          "To remember why choices were made",
+        ],
+      },
+    ],
+    tools: ["Notion", "Markdown", "Git"],
+  },
+
+  "process-docs": {
+    title: "Process & Documentation",
+    intro:
+      "This section focuses on structure—how I translate messy thoughts into clear plans, notes, and systems before and during building.",
+    sections: [
+      {
+        heading: "Process Artifacts",
+        items: [
+          "Problem statements and scope notes",
+          "Feature breakdowns and priorities",
+          "Rough diagrams and flow explanations",
+          "API and data model notes (when relevant)",
+        ],
+      },
+      {
+        heading: "How I Use Documentation",
+        items: [
+          "To reduce confusion while building",
+          "To keep decisions traceable",
+          "To make collaboration easier in the future",
+        ],
+      },
+    ],
+    tools: ["Notion", "Figma", "GitHub"],
+  },
+
+  "learning-notes": {
+    title: "Learning Notes",
+    intro:
+      "Short, practical notes from my learning journey—shared as I go, in case they help someone else walking a similar path.",
+    sections: [
+      {
+        heading: "Topics I Write About",
+        items: [
+          "JavaScript and React concepts",
+          "Backend basics and data flow",
+          "Design–development handoff lessons",
+          "Things that clicked (and things that didn’t)",
+        ],
+      },
+      {
+        heading: "Intent",
+        items: [
+          "Learn in public",
+          "Explain concepts simply",
+          "Show that progress is built step by step",
+        ],
+      },
+    ],
+    tools: ["VS Code", "Jupyter Notebook", "Git"],
+  },
+
+  // ✅ Data Analysis pages
+  "eda-notebooks": {
+    title: "EDA Notebooks",
+    intro:
+      "Exploratory notebooks where I inspect datasets, test assumptions, and discover patterns before making conclusions.",
+    sections: [
+      {
+        heading: "Typical Workflow",
+        items: [
+          "Dataset overview + questions",
+          "Missing values + data types check",
+          "Distribution and correlation checks",
+          "Early insights and next steps",
+        ],
+      },
+      {
+        heading: "What You’ll See",
+        items: [
+          "Clean summaries (not noise)",
+          "Simple visuals to support insights",
+          "Short reflections on what the data suggests",
+        ],
+      },
+    ],
+    tools: ["Python", "Pandas", "NumPy", "Jupyter Notebook"],
+  },
+
+  "data-cleaning": {
+    title: "Data Cleaning & Preparation",
+    intro:
+      "Turning raw, messy data into something consistent and usable—so analysis becomes reliable.",
+    sections: [
+      {
+        heading: "Cleaning Tasks",
+        items: [
+          "Handling missing values",
+          "Fixing inconsistent formats",
+          "Removing duplicates / invalid entries",
+          "Feature extraction (creating useful columns)",
+        ],
+      },
+      {
+        heading: "Outputs",
+        items: [
+          "Cleaned datasets ready for analysis",
+          "Notes on assumptions and changes made",
+        ],
+      },
+    ],
+    tools: ["Python", "Pandas", "NumPy"],
+  },
+
+  "insights-storytelling": {
+    title: "Insights & Storytelling",
+    intro:
+      "Where analysis becomes communication—turning findings into clear takeaways, decisions, and next steps.",
+    sections: [
+      {
+        heading: "Focus Areas",
+        items: [
+          "Clear, human-readable summaries",
+          "Key metrics and what they mean",
+          "Visuals that support the point (not decoration)",
+          "Recommendations and follow-up questions",
+        ],
+      },
+      {
+        heading: "Formats",
+        items: [
+          "Notebook summaries",
+          "Mini reports and slide-style write-ups",
+          "Dashboards and simple charts",
+        ],
+      },
+    ],
+    tools: ["Jupyter Notebook", "Pandas", "NumPy"],
+  },
+
+  // Existing pages (unchanged)
   illustrator: {
     title: "Adobe Illustrator Projects",
     intro:
@@ -97,6 +309,7 @@ export const CATEGORY_PAGES = {
     ],
     tools: ["Adobe Illustrator"],
   },
+
   photoshop: {
     title: "Photoshop Projects",
     intro:
@@ -119,6 +332,7 @@ export const CATEGORY_PAGES = {
     ],
     tools: ["Adobe Photoshop"],
   },
+
   "ui-design": {
     title: "User Interface",
     intro:
@@ -141,6 +355,7 @@ export const CATEGORY_PAGES = {
     ],
     tools: ["Figma", "Adobe XD", "React", "Tailwind CSS"],
   },
+
   "ux-case-studies": {
     title: "UX Case Studies",
     intro:
@@ -164,6 +379,7 @@ export const CATEGORY_PAGES = {
     ],
     tools: ["Figma", "Miro", "Notion"],
   },
+
   wireframes: {
     title: "Wireframes",
     intro:
@@ -186,6 +402,7 @@ export const CATEGORY_PAGES = {
     ],
     tools: ["Figma", "Pen & Paper"],
   },
+
   "digital-art": {
     title: "Digital Art",
     intro:
@@ -208,6 +425,7 @@ export const CATEGORY_PAGES = {
     ],
     tools: ["Procreate", "Photoshop"],
   },
+
   "traditional-art": {
     title: "Traditional Art",
     intro:
@@ -230,6 +448,7 @@ export const CATEGORY_PAGES = {
     ],
     tools: ["Pencil", "Ink", "Markers"],
   },
+
   "seamless-files": {
     title: "Seamless Files",
     intro:
@@ -252,6 +471,7 @@ export const CATEGORY_PAGES = {
     ],
     tools: ["Illustrator", "Procreate", "Photoshop"],
   },
+
   "doodle-art": {
     title: "Doodle Art",
     intro:

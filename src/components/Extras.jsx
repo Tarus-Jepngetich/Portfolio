@@ -59,8 +59,8 @@ export default function Extras() {
         </h2>
 
         <p className="font-serif text-center text-[var(--ink-soft)] max-w-3xl mx-auto mb-10">
-          Explore my playground thoughts and life experiment journal — essays on design,
-          tech, and the human side of building.
+          A collection of reflections on design, tech, and everyday life. I share lessons as I learn them: 
+          not as an expert, but as someone walking the path and inviting others to walk with me.
         </p>
 
         <div className="relative flex justify-center items-center w-full h-[420px] group">

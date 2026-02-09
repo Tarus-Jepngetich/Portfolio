@@ -34,6 +34,11 @@ export default function Hero() {
             <p className="font-serif text-[var(--ink-soft)] text-base md:text-lg mb-6">
               I blend clean code, thoughtful interfaces, and visual storytelling to create websites
               and products that feel intuitive and human.
+               <p className="max-w-xl mx-auto text-sm italic font-serif text-[var(--ink-soft)] tracking-wide">
+  Conceived, designed, written, illustrated, and built by Tarus.
+  An evolving project shaped entirely by my ideas and skills.
+</p>
+
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3">
@@ -45,14 +50,7 @@ export default function Hero() {
 >
   View GitHub
 </a>
-   <a
-  href="https://github.com/Tarus-Jepngetich"
-  target="_blank"
-  rel="noreferrer"
-  className="px-6 py-3 rounded-none border border-[var(--ink)] text-sm font-semibold text-[var(--ink)] hover:bg-[var(--peach)]/60 transition"
->
-  View Resume
-</a>
+   
 
               <a
                 href="/certificates/Mercy Tarus_Resume.pdf"
@@ -66,7 +64,7 @@ export default function Hero() {
            {/* Pull quote */}
 <div className="mt-8 border-l-4 border-[var(--mint)] pl-4">
   <p className="font-serif italic text-[var(--ink)]">
-    “I love turning messy ideas into simple, grounded experiences.”
+    “I love turning unformed ideas into simple,real, grounded experiences.”
   </p>
 </div>
 
@@ -114,7 +112,7 @@ export default function Hero() {
               Editor’s Note
             </div>
             <p className="mt-2 text-sm text-[var(--ink-soft)] font-serif">
-              Explore sections — projects in GitHub, case studies,ui/ux, art, through the portfolio section.
+              Explore sections — projects documentation, UI/UX studies, etc through the portfolio section.
             </p>
           </div>
         </div>

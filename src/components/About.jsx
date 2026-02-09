@@ -25,10 +25,10 @@ export default function About() {
         {/* Pastel stamps */}
         <div className="flex items-center gap-2">
           <span className="px-3 py-1 text-[11px] uppercase tracking-[0.22em] border border-[var(--rule)] bg-[var(--mint)]/60 text-[var(--ink)]">
-            Web Dev
+            Software Developer
           </span>
           <span className="px-3 py-1 text-[11px] uppercase tracking-[0.22em] border border-[var(--rule)] bg-[var(--peach)]/60 text-[var(--ink)]">
-            UI/UX + Art
+            UI/UX
           </span>
         </div>
 
@@ -44,7 +44,7 @@ export default function About() {
         </h2>
 
         <p className="font-serif text-center text-[var(--ink-soft)] max-w-2xl mx-auto mb-10">
-          I’m a multi-passionate builder at heart — majoring in software development, currently knee ddep in web development and deeply curious about UI/UX and data analysis, 
+          I’m a multi-passionate builder at heart — majoring in software development, currently knee deep in web development and deeply curious about UI/UX and data analysis, 
           and an art hobbyist who loves turning ideas into visuals.
         </p>
 
@@ -65,19 +65,23 @@ export default function About() {
                   MERN • Design • UI Systems
                 </li>
                 <li>
+                  <span className="font-semibold text-[var(--ink)]">Skills:</span>{" "}
+                  JavaScript • CSS • HTML
+                </li>
+                <li>
                   <span className="font-semibold text-[var(--ink)]">Style:</span>{" "}
                   Minimal, warm, editorial
                 </li>
                 <li>
                   <span className="font-semibold text-[var(--ink)]">Also:</span>{" "}
-                  Writing, illustration, visual journals
+                  Writing, illustration
                 </li>
               </ul>
             </div>
 
             <div className="mt-6 border-l-4 border-[var(--mint)] pl-4">
               <p className="font-serif italic text-[var(--ink)]">
-                “I love turning messy ideas into simple, grounded experiences.”
+                “I love turning ideas into simple, grounded experiences.”
               </p>
             </div>
           </div>
@@ -85,7 +89,7 @@ export default function About() {
           <div className="md:col-span-8">
             <div className="columns-1 md:columns-2 gap-10 font-serif text-[var(--ink)] leading-relaxed">
               <p className="mb-4">
-                I’m Tarus — a web developer who finds beauty in structure, 
+                I’m Tarus — a software developer who finds beauty in structure, 
                 simplicity, and creativity. I enjoy building
                 interfaces that feel clear and calm, but also human.
               </p>
@@ -107,6 +111,13 @@ export default function About() {
                 This portfolio is built like a newspaper on purpose: I want it
                 to feel editorial, timeless, and crafted — the same way I aim to
                 craft the experiences I design.
+              </p>
+
+               <p className="mb-4">
+                I’m currently focused on growing as a full-stack developer, building 
+                thoughtful digital products and learning through real-world projects. 
+                I’m open to internships, junior roles, and collaborations where curiosity, 
+                care, and craft matter.
               </p>
             </div>
 
