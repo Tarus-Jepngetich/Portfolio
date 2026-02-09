@@ -1,7 +1,47 @@
+import { useState } from "react";
 import Flower from "../assets/Flower.png";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 
+const API_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:5000"; // dev fallback
+
 export default function Contact() {
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState({ state: "idle", msg: "" }); 
+  // state: idle | loading | success | error
+
+  function onChange(e) {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  }
+
+  async function onSubmit(e) {
+    e.preventDefault();
+    setStatus({ state: "loading", msg: "Sending..." });
+
+    try {
+      const res = await fetch(`${API_URL}/api/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        throw new Error(data?.error || "Failed to send message.");
+      }
+
+      setStatus({ state: "success", msg: "Message sent! I’ll get back to you soon 💌" });
+      setForm({ name: "", email: "", message: "" });
+    } catch (err) {
+      setStatus({
+        state: "error",
+        msg: err?.message || "Something went wrong. Please try again.",
+      });
+    }
+  }
+
   return (
     <div className="relative bg-white border border-[var(--rule)] shadow-[0_18px_50px_rgba(0,0,0,0.10)] overflow-hidden">
       {/* Decorative art (inside page, mid-right) */}
@@ -48,9 +88,7 @@ export default function Contact() {
           {/* Left column */}
           <aside className="md:col-span-4">
             <div className="border border-[var(--rule)] p-5">
-              <h3 className="font-serif text-xl text-[var(--ink)] mb-2">
-                Details
-              </h3>
+              <h3 className="font-serif text-xl text-[var(--ink)] mb-2">Details</h3>
               <div className="rule my-3" />
 
               <ul className="font-serif text-sm text-[var(--ink-soft)] space-y-3">
@@ -111,16 +149,23 @@ export default function Contact() {
 
           {/* Right column */}
           <div className="md:col-span-8">
-            <form className="border border-[var(--rule)] p-6 md:p-8 bg-[var(--paper)]">
+            <form
+              onSubmit={onSubmit}
+              className="border border-[var(--rule)] p-6 md:p-8 bg-[var(--paper)]"
+            >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <label className="flex flex-col gap-2">
                   <span className="text-[11px] uppercase tracking-[0.22em] text-[var(--ink-soft)]">
                     Your Name
                   </span>
                   <input
+                    name="name"
+                    value={form.name}
+                    onChange={onChange}
                     type="text"
                     placeholder="Tarus Gazette Reader's Name"
                     className="px-4 py-3 border border-[var(--rule)] bg-white text-[var(--ink)] outline-none focus:ring-2 focus:ring-[var(--mint)]"
+                    required
                   />
                 </label>
 
@@ -129,9 +174,13 @@ export default function Contact() {
                     Your Email
                   </span>
                   <input
+                    name="email"
+                    value={form.email}
+                    onChange={onChange}
                     type="email"
                     placeholder="reader@email.com"
                     className="px-4 py-3 border border-[var(--rule)] bg-white text-[var(--ink)] outline-none focus:ring-2 focus:ring-[var(--mint)]"
+                    required
                   />
                 </label>
               </div>
@@ -141,11 +190,26 @@ export default function Contact() {
                   Message
                 </span>
                 <textarea
+                  name="message"
+                  value={form.message}
+                  onChange={onChange}
                   rows="5"
                   placeholder="Write your message here..."
                   className="px-4 py-3 border border-[var(--rule)] bg-white text-[var(--ink)] outline-none focus:ring-2 focus:ring-[var(--peach)]"
+                  required
                 />
               </label>
+
+              {/* status banner */}
+              {status.state !== "idle" && (
+                <div
+                  className={`mt-4 border border-[var(--rule)] px-4 py-3 font-serif text-sm ${
+                    status.state === "success" ? "bg-[var(--mint)]/30" : ""
+                  } ${status.state === "error" ? "bg-[var(--peach)]/30" : ""}`}
+                >
+                  {status.msg}
+                </div>
+              )}
 
               <div className="mt-6 flex items-center justify-between gap-4 flex-wrap">
                 <span className="text-xs text-[var(--ink-soft)] font-serif">
@@ -154,9 +218,10 @@ export default function Contact() {
 
                 <button
                   type="submit"
-                  className="px-6 py-3 border border-[var(--ink)] bg-[var(--ink)] text-white text-sm font-semibold hover:opacity-90 transition"
+                  disabled={status.state === "loading"}
+                  className="px-6 py-3 border border-[var(--ink)] bg-[var(--ink)] text-white text-sm font-semibold hover:opacity-90 transition disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  Send Message ✉️
+                  {status.state === "loading" ? "Sending..." : "Send Message ✉️"}
                 </button>
               </div>
             </form>
@@ -167,7 +232,6 @@ export default function Contact() {
           <div className="rule" />
           <div className="mt-3 flex items-center justify-between text-[11px] uppercase tracking-[0.26em] text-[var(--ink-soft)]">
             <span>Filed Under: Contact</span>
-           
           </div>
         </div>
       </div>
