@@ -1,4 +1,4 @@
-import Logo from "../assets/logo.png";
+import Logo from "../assets/Logo.png";
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { playPageFlip } from "../utils/sfx";
