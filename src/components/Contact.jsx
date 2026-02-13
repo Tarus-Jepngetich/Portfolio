@@ -2,12 +2,9 @@ import { useState } from "react";
 import Flower from "../assets/Flower.png";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 
-const API_URL =
-  import.meta.env.VITE_API_URL || "http://localhost:5000"; // dev fallback
-
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState({ state: "idle", msg: "" }); 
+  const [status, setStatus] = useState({ state: "idle", msg: "" });
   // state: idle | loading | success | error
 
   function onChange(e) {
@@ -20,19 +17,25 @@ export default function Contact() {
     setStatus({ state: "loading", msg: "Sending..." });
 
     try {
-      const res = await fetch(`${API_URL}/api/contact`, {
+      const formEl = e.currentTarget;
+
+      // Netlify requires URL encoded format
+      const formData = new FormData(formEl);
+      const body = new URLSearchParams(formData).toString();
+
+      const res = await fetch("/", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body,
       });
 
-      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error("Failed to send message.");
 
-      if (!res.ok) {
-        throw new Error(data?.error || "Failed to send message.");
-      }
+      setStatus({
+        state: "success",
+        msg: "Message sent! I’ll get back to you soon 💌",
+      });
 
-      setStatus({ state: "success", msg: "Message sent! I’ll get back to you soon 💌" });
       setForm({ name: "", email: "", message: "" });
     } catch (err) {
       setStatus({
@@ -44,7 +47,7 @@ export default function Contact() {
 
   return (
     <div className="relative bg-white border border-[var(--rule)] shadow-[0_18px_50px_rgba(0,0,0,0.10)] overflow-hidden">
-      {/* Decorative art (inside page, mid-right) */}
+      {/* Decorative art */}
       <div className="hidden md:block absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none opacity-90">
         <img
           src={Flower}
@@ -59,7 +62,6 @@ export default function Contact() {
           Contact Desk
         </span>
 
-        {/* Pastel stamps */}
         <div className="flex items-center gap-2">
           <span className="px-3 py-1 text-[11px] uppercase tracking-[0.22em] border border-[var(--rule)] bg-[var(--mint)]/60 text-[var(--ink)]">
             Collaborate
@@ -74,7 +76,6 @@ export default function Contact() {
         </span>
       </div>
 
-      {/* Content */}
       <div className="p-6 md:p-10">
         <h2 className="font-serif text-[var(--ink)] text-4xl md:text-5xl leading-tight mb-4 text-center">
           Get in Touch 💌
@@ -109,50 +110,28 @@ export default function Contact() {
                     Brisbane • Australia
                   </div>
                 </li>
-
-                <li>
-                  <span className="uppercase tracking-[0.18em] text-[11px] text-[var(--ink-soft)]">
-                    Links
-                  </span>
-
-                  <div className="flex flex-col gap-2">
-                    <a
-                      href="https://github.com/"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex items-center gap-2 underline decoration-[var(--mint)] underline-offset-4 hover:opacity-80"
-                    >
-                      <FaGithub className="text-lg" />
-                      GitHub
-                    </a>
-
-                    <a
-                      href="https://www.linkedin.com/"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex items-center gap-2 underline decoration-[var(--peach)] underline-offset-4 hover:opacity-80"
-                    >
-                      <FaLinkedin className="text-lg" />
-                      LinkedIn
-                    </a>
-                  </div>
-                </li>
               </ul>
-            </div>
-
-            <div className="mt-6 border-l-4 border-[var(--peach)] pl-4">
-              <p className="font-serif italic text-[var(--ink)]">
-                “Open to internships, freelance work, and meaningful collaborations.”
-              </p>
             </div>
           </aside>
 
           {/* Right column */}
           <div className="md:col-span-8">
             <form
+              name="contact"
+              method="POST"
+              data-netlify="true"
+              data-netlify-honeypot="bot-field"
               onSubmit={onSubmit}
               className="border border-[var(--rule)] p-6 md:p-8 bg-[var(--paper)]"
             >
+              {/* Required hidden fields for Netlify */}
+              <input type="hidden" name="form-name" value="contact" />
+              <p className="hidden">
+                <label>
+                  Don’t fill this out: <input name="bot-field" />
+                </label>
+              </p>
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <label className="flex flex-col gap-2">
                   <span className="text-[11px] uppercase tracking-[0.22em] text-[var(--ink-soft)]">
@@ -200,7 +179,6 @@ export default function Contact() {
                 />
               </label>
 
-              {/* status banner */}
               {status.state !== "idle" && (
                 <div
                   className={`mt-4 border border-[var(--rule)] px-4 py-3 font-serif text-sm ${
@@ -225,13 +203,6 @@ export default function Contact() {
                 </button>
               </div>
             </form>
-          </div>
-        </div>
-
-        <div className="mt-10">
-          <div className="rule" />
-          <div className="mt-3 flex items-center justify-between text-[11px] uppercase tracking-[0.26em] text-[var(--ink-soft)]">
-            <span>Filed Under: Contact</span>
           </div>
         </div>
       </div>
