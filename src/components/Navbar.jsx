@@ -165,7 +165,7 @@ export default function Navbar() {
                     }`
                   }
                 >
-                  Portfolio
+                  Projects
                 </NavLink>
               </li>
             </ul>
@@ -204,7 +204,7 @@ export default function Navbar() {
                         closeMenu();
                       }}
                     >
-                      Journal
+                      Projects
                     </NavLink>
                   </li>
                 </ul>
