@@ -20,20 +20,8 @@ export const PROJECT_GROUPS = {
         "Ongoing notes that capture how ideas evolve—questions, decisions, missteps, and small breakthroughs.",
       kind: "Journal",
     },
-    {
-      id: "process-docs",
-      title: "Process & Documentation",
-      description:
-        "How I break problems down, document assumptions, and move from thought to structure.",
-      kind: "Process",
-    },
-    {
-      id: "learning-notes",
-      title: "Learning Notes",
-      description:
-        "Short, honest write-ups on what I’m learning—concepts, patterns, and things I wish I knew earlier.",
-      kind: "Notes",
-    },
+    
+  
   ],
 
   // ✅ Data Analysis tab
@@ -160,7 +148,7 @@ export const CATEGORY_PAGES = {
         readTime: "3 min read",
         excerpt:
           "My first documentation entry — which is obviously this website.",
-        to: "/Project Documentation/PERSONAL PORTFOLIO.pdf",
+        to: "public/Project Documentation/PERSONAL PORTFOLIO.pdf",
       },
     ],
   },
