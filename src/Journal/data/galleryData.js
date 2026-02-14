@@ -151,60 +151,20 @@ export const CATEGORY_PAGES = {
         ],
       },
     ],
-    tools: ["Notion", "Markdown", "Git"],
-  },
-
-  "process-docs": {
-    title: "Process & Documentation",
-    intro:
-      "This section focuses on structure—how I translate messy thoughts into clear plans, notes, and systems before and during building.",
-    sections: [
+    tools: ["Draw.io","Figma", "Markdown", "Git"],
+    docs: [
       {
-        heading: "Process Artifacts",
-        items: [
-          "Problem statements and scope notes",
-          "Feature breakdowns and priorities",
-          "Rough diagrams and flow explanations",
-          "API and data model notes (when relevant)",
-        ],
-      },
-      {
-        heading: "How I Use Documentation",
-        items: [
-          "To reduce confusion while building",
-          "To keep decisions traceable",
-          "To make collaboration easier in the future",
-        ],
+        id: "Personal-Portfolio",
+        title: "Portfolio Website Documentation",
+        date: "2026-02-15",
+        readTime: "3 min read",
+        excerpt:
+          "My first documentation entry — which is obviously this website.",
+        to: "/Project Documentation/PERSONAL PORTFOLIO.pdf",
       },
     ],
-    tools: ["Notion", "Figma", "GitHub"],
   },
 
-  "learning-notes": {
-    title: "Learning Notes",
-    intro:
-      "Short, practical notes from my learning journey—shared as I go, in case they help someone else walking a similar path.",
-    sections: [
-      {
-        heading: "Topics I Write About",
-        items: [
-          "JavaScript and React concepts",
-          "Backend basics and data flow",
-          "Design–development handoff lessons",
-          "Things that clicked (and things that didn’t)",
-        ],
-      },
-      {
-        heading: "Intent",
-        items: [
-          "Learn in public",
-          "Explain concepts simply",
-          "Show that progress is built step by step",
-        ],
-      },
-    ],
-    tools: ["VS Code", "Jupyter Notebook", "Git"],
-  },
 
   // ✅ Data Analysis pages
   "eda-notebooks": {
