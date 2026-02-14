@@ -1,19 +1,51 @@
 # 🌿 Personal Portfolio
 
-Welcome to my personal portfolio — a space where I showcase my work across **web development, UI/UX design, and art**.
+Welcome to my personal portfolio (Digital CV)— a space where I showcase my tech journey & work across **development, UI/UX & graphic design, and art**. 
 
-## ✨ Update: Portfolio × Visual Journal Integration
+🌍 **Status:**  
+✅ Designed  
+✅ Built  
+✅ Deployed  
+✅ Live in Production  
 
-I’ve decided to combine my **personal portfolio** and **visual journal** into a single, seamless experience — allowing visitors to explore my web projects, designs, and creative process all in one space.
-
-This integration makes navigation smoother and storytelling more cohesive, reflecting how my **art, design, and development** intersect.
-
-🎨 **New visuals:** Decorative elements (Leafs.png) were added to the _About_ and _Hero_ sections for a calm, polished aesthetic.
+This portfolio is fully deployed and accessible online as a production application — not a prototype.
 
 ---
 
-🧠 Built with:
+## ✨ Update: Portfolio × Visual Journal Integration
 
-- React JS
+I’ve combined my **personal portfolio** and **visual journal** into a single, seamless experience — allowing visitors to explore my web projects, designs, and creative process all in one cohesive space.
+
+This integration makes navigation smoother and storytelling more intentional, reflecting how my **art, design, and development** intersect in real life.
+
+## 🛠 Built With
+
+- React
 - Tailwind CSS
-- Deployed on GitHub Pages
+- Vite
+- MongoDB
+- Modern responsive design principles
+- Custom UI styling & animation details
+
+---
+
+## 🎯 Purpose
+
+This portfolio is more than a showcase —  
+it’s a living documentation of:
+
+- My technical growth
+- My design thinking
+- My creative exploration
+- My problem-solving approach
+
+It represents the intersection of logic and art.
+
+---
+
+Built with intention.  
+Deployed with confidence.
+
+🧠  Deployed on Render & Netlify
+
+
