@@ -148,7 +148,8 @@ export const CATEGORY_PAGES = {
         readTime: "3 min read",
         excerpt:
           "My first documentation entry — which is obviously this website.",
-        to: "public/Project Documentation/PERSONAL PORTFOLIO.pdf",
+        to: "public/ProjectDocumentation/PersonalPortfolio.pdf",
+     
       },
     ],
   },
