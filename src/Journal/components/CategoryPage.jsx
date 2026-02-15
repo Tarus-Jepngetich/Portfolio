@@ -1,6 +1,7 @@
 // src/journal/components/CategoryPage.jsx
 import { Link, useParams, useLocation } from "react-router-dom";
 import HeaderCard from "./HeaderCard";
+import ArtCarousel from "./ArtCarousel";
 import { CATEGORY_PAGES } from "../data/galleryData";
 
 export default function CategoryPage() {
@@ -56,7 +57,9 @@ export default function CategoryPage() {
           </Link>
         </div>
 
-        <p className="text-sm text-slate-300 leading-relaxed">{category.intro}</p>
+        <p className="text-sm text-slate-300 leading-relaxed">
+          {category.intro}
+        </p>
 
         {category.tools && (
           <div className="text-[11px] text-slate-400">
@@ -88,53 +91,50 @@ export default function CategoryPage() {
             </div>
           ))}
         </div>
-{category.docs?.length > 0 && (
-  <div className="pt-4 space-y-3">
-    <div className="flex items-center justify-between">
-      <p className="text-[11px] uppercase tracking-[0.2em] text-slate-400">
-        Development Journal
-      </p>
-      <span className="text-[11px] text-slate-500">
-        {category.docs.length} entry{category.docs.length > 1 ? "ies" : ""}
-      </span>
-    </div>
 
-    <div className="grid gap-3">
-      {category.docs.map((doc) => (
-        <Link
-          key={doc.id}
-          to={doc.to}
-          className="block rounded-xl border border-slate-800 bg-slate-950/40 p-4 hover:bg-slate-950/60 transition"
-        >
-          <div className="flex items-start justify-between gap-4">
-            <div>
-              <h3 className="text-sm font-semibold text-slate-50">
-                {doc.title}
-              </h3>
-              <p className="mt-1 text-xs text-slate-400">
-                {doc.date} • {doc.readTime}
+        {/* ✅ Carousel only shows if artworks exist on that category */}
+        {category.artworks?.length > 0 && <ArtCarousel items={category.artworks} />}
+
+        {category.docs?.length > 0 && (
+          <div className="pt-4 space-y-3">
+            <div className="flex items-center justify-between">
+              <p className="text-[11px] uppercase tracking-[0.2em] text-slate-400">
+                Development Journal
               </p>
-              <p className="mt-2 text-sm text-slate-300 leading-relaxed">
-                {doc.excerpt}
-              </p>
+              <span className="text-[11px] text-slate-500">
+                {category.docs.length} entry{category.docs.length > 1 ? "ies" : ""}
+              </span>
             </div>
 
-            <span className="shrink-0 text-[11px] text-sky-300 hover:text-sky-200">
-              Read →
-            </span>
+            <div className="grid gap-3">
+              {category.docs.map((doc) => (
+                <Link
+                  key={doc.id}
+                  to={doc.to}
+                  className="block rounded-xl border border-slate-800 bg-slate-950/40 p-4 hover:bg-slate-950/60 transition"
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <h3 className="text-sm font-semibold text-slate-50">
+                        {doc.title}
+                      </h3>
+                      <p className="mt-1 text-xs text-slate-400">
+                        {doc.date} • {doc.readTime}
+                      </p>
+                      <p className="mt-2 text-sm text-slate-300 leading-relaxed">
+                        {doc.excerpt}
+                      </p>
+                    </div>
+
+                    <span className="shrink-0 text-[11px] text-sky-300 hover:text-sky-200">
+                      Read →
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
-        </Link>
-      ))}
-    </div>
-  </div>
-)}
-
-       {/* 
-  Later, you can replace these bullet points with actual images, mockups,
-  or embedded case studies for each project.
-*/}
-
-        
+        )}
       </section>
     </div>
   );
